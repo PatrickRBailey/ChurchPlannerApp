@@ -4,8 +4,19 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Home", "Index", "Home")</li>
+        <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Messages", "Index", "Messages")</li>
+        <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Music", "Index", "Music")</li>
+        <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Players", "Index", "Players")</li>
+        <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Service Requests", "Index", "Request")</li>
+        <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Service Plans", "Index", "ServicePlan")</li>
+    </ul>
     <div>
         @RenderBody()
     </div>
