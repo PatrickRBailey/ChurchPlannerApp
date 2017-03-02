@@ -7,11 +7,30 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        body{ 
+
+        }
+        .messages {
+            margin-bottom:20px;
+            width: 100%;
+            background-color: #fff;
+            position: relative;
+            float: left;
+            border: solid #d7ccc8 .5px;
+            padding: 10px;
+}
+        .container{
+            margin-top:50px;
+        }
+    </style>
 </head>
 <body>
+    @*TODO: Make Interactive Navbar*@
     <ul class="nav nav-tabs">
         <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Home", "Index", "Home")</li>
-        <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Messages", "Index", "Messages")</li>
+        <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllMessages" ? "active" : "")">@Html.ActionLink("Forum", "AllMessages", "Forum")</li>
         <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Music", "Index", "Music")</li>
         <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Players", "Index", "Players")</li>
         <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Service Requests", "Index", "Request")</li>
