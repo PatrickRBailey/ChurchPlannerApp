@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ChurchPlannerApp.Models
 {
-    public class Pofile
+    public class Profile
     {
         public int ProfileID { get; set; }
         public string FName { get; set; }

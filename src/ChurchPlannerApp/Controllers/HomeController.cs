@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 
-// TODO: Create Nav functionality
+
 namespace ChurchPlannerApp.Controllers
 {
     public class HomeController : Controller
