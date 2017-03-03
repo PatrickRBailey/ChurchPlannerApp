@@ -30,6 +30,19 @@ namespace ChurchPlannerApp.Repositories
                 message = new Message { Body = "This site is so fun!!", From = profile };
                 context.Messages.Add(message);
 
+                Song song = new Song { Title = "How Great Is Our God", Url = "https://youtu.be/KBD18rsVJHk" };
+                context.Songs.Add(song);
+
+                song = new Song { Title = "From The Day", Url = "https://youtu.be/TUjuRFwwvaw" };
+                context.Songs.Add(song);
+
+                song = new Song { Title = "Lift Your Head Weary Sinners", Url = "https://youtu.be/xPpEOUVpxrM" };
+                context.Songs.Add(song);
+
+                song = new Song { Title = "How He Loves", Url = "https://youtu.be/Plngh8SkkA4" };
+                context.Songs.Add(song);
+
+
                 context.SaveChanges();
 
             }
