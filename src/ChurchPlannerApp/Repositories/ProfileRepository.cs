@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ChurchPlannerApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ChurchPlannerApp.Repositories
 {
@@ -15,7 +16,7 @@ namespace ChurchPlannerApp.Repositories
         }
         public List<Profile> GetAllProfiles()
         {
-            return context.Profiles.ToList();
+            return context.Profiles.Include(i => i.Instruments).ToList();
         }
     }
 }
