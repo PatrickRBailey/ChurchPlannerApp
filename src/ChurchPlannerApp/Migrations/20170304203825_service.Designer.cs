@@ -8,9 +8,10 @@ using ChurchPlannerApp.Repositories;
 namespace ChurchPlannerApp.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20170304203825_service")]
+    partial class service
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -47,33 +48,13 @@ namespace ChurchPlannerApp.Migrations
 
                     b.Property<int>("PhoneNum");
 
-                    b.Property<int?>("ServiceID");
-
                     b.Property<int>("Type");
 
                     b.Property<string>("UserName");
 
                     b.HasKey("ProfileID");
 
-                    b.HasIndex("ServiceID");
-
                     b.ToTable("Profiles");
-                });
-
-            modelBuilder.Entity("ChurchPlannerApp.Models.Service", b =>
-                {
-                    b.Property<int>("ServiceID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("PracticeDate");
-
-                    b.Property<DateTime>("ServiceDate");
-
-                    b.Property<string>("Title");
-
-                    b.HasKey("ServiceID");
-
-                    b.ToTable("Services");
                 });
 
             modelBuilder.Entity("ChurchPlannerApp.Models.Song", b =>
@@ -95,13 +76,6 @@ namespace ChurchPlannerApp.Migrations
                     b.HasOne("ChurchPlannerApp.Models.Profile", "From")
                         .WithMany()
                         .HasForeignKey("FromProfileID");
-                });
-
-            modelBuilder.Entity("ChurchPlannerApp.Models.Profile", b =>
-                {
-                    b.HasOne("ChurchPlannerApp.Models.Service")
-                        .WithMany("Team")
-                        .HasForeignKey("ServiceID");
                 });
         }
     }

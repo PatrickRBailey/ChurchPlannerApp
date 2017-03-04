@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using ChurchPlannerApp.Models;
+using System;
 
 namespace ChurchPlannerApp.Repositories
 {
@@ -13,9 +14,18 @@ namespace ChurchPlannerApp.Repositories
 
             if (!context.Messages.Any())
             {
-                //TODO Create appsettings.json and add connection string
                 Profile profile = new Profile { FName = "Johnny", LName = "Rocket" };
                 context.Profiles.Add(profile);
+
+                Service service = new Models.Service
+                {
+                    Title = "Sunday Morning",
+                    PracticeDate = DateTime.Parse("3/7/2017")
+                ,
+                    ServiceDate = DateTime.Parse("3/9/2017")
+                };
+                service.Team.Add(profile);
+                context.Services.Add(service);
 
                 Message message = new Message { Body = "How is everyone doing today?", From = profile };
                 context.Messages.Add(message);
