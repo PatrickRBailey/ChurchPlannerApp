@@ -14,5 +14,7 @@ namespace ChurchPlannerApp.Models
 
         private List<Profile> team = new List<Profile>();
         public List<Profile> Team { get { return team; } }
+
+
     }
 }

@@ -52,6 +52,9 @@ namespace ChurchPlannerApp.Repositories
                 song = new Song { Title = "How He Loves", Url = "https://youtu.be/Plngh8SkkA4" };
                 context.Songs.Add(song);
 
+                
+                
+
 
                 context.SaveChanges();
 

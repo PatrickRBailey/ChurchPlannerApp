@@ -8,29 +8,14 @@ using ChurchPlannerApp.Repositories;
 namespace ChurchPlannerApp.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20170304051816_request")]
+    partial class request
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("ChurchPlannerApp.Models.Instrument", b =>
-                {
-                    b.Property<int>("InstrumentID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.Property<int?>("ProfileID");
-
-                    b.HasKey("InstrumentID");
-
-                    b.HasIndex("ProfileID");
-
-                    b.ToTable("Instruments");
-                });
 
             modelBuilder.Entity("ChurchPlannerApp.Models.Message", b =>
                 {
@@ -63,15 +48,11 @@ namespace ChurchPlannerApp.Migrations
 
                     b.Property<int>("PhoneNum");
 
-                    b.Property<int?>("ServiceID");
-
                     b.Property<int>("Type");
 
                     b.Property<string>("UserName");
 
                     b.HasKey("ProfileID");
-
-                    b.HasIndex("ServiceID");
 
                     b.ToTable("Profiles");
                 });
@@ -81,21 +62,12 @@ namespace ChurchPlannerApp.Migrations
                     b.Property<int>("ServiceID")
                         .ValueGeneratedOnAdd();
 
-<<<<<<< HEAD
-                    b.Property<DateTime>("PracticeDate");
-
-                    b.Property<DateTime>("ServiceDate");
-=======
                     b.Property<DateTime>("Date");
->>>>>>> start to list service requests
 
                     b.Property<string>("Title");
 
                     b.HasKey("ServiceID");
 
-<<<<<<< HEAD
-                    b.ToTable("Services");
-=======
                     b.ToTable("Service");
                 });
 
@@ -115,7 +87,6 @@ namespace ChurchPlannerApp.Migrations
                     b.HasIndex("ServiceID");
 
                     b.ToTable("Requests");
->>>>>>> start to list service requests
                 });
 
             modelBuilder.Entity("ChurchPlannerApp.Models.Song", b =>
@@ -132,13 +103,6 @@ namespace ChurchPlannerApp.Migrations
                     b.ToTable("Songs");
                 });
 
-            modelBuilder.Entity("ChurchPlannerApp.Models.Instrument", b =>
-                {
-                    b.HasOne("ChurchPlannerApp.Models.Profile")
-                        .WithMany("Instruments")
-                        .HasForeignKey("ProfileID");
-                });
-
             modelBuilder.Entity("ChurchPlannerApp.Models.Message", b =>
                 {
                     b.HasOne("ChurchPlannerApp.Models.Profile", "From")
@@ -146,12 +110,6 @@ namespace ChurchPlannerApp.Migrations
                         .HasForeignKey("FromProfileID");
                 });
 
-<<<<<<< HEAD
-            modelBuilder.Entity("ChurchPlannerApp.Models.Profile", b =>
-                {
-                    b.HasOne("ChurchPlannerApp.Models.Service")
-                        .WithMany("Team")
-=======
             modelBuilder.Entity("ChurchPlannerApp.Models.ServiceRequest", b =>
                 {
                     b.HasOne("ChurchPlannerApp.Models.Profile", "Profile")
@@ -160,7 +118,6 @@ namespace ChurchPlannerApp.Migrations
 
                     b.HasOne("ChurchPlannerApp.Models.Service", "Service")
                         .WithMany()
->>>>>>> start to list service requests
                         .HasForeignKey("ServiceID");
                 });
         }

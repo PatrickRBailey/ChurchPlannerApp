@@ -33,8 +33,10 @@
         <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllMessages" ? "active" : "")">@Html.ActionLink("Forum", "AllMessages", "Forum")</li>
         <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllSongs" ? "active" : "")">@Html.ActionLink("Music", "AllSongs", "Music")</li>
         <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllMembers" ? "active" : "")">@Html.ActionLink("Players", "AllMembers", "Profile")</li>
-        <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Service Requests", "Index", "Request")</li>
+        <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllRequests" ? "active" : "")">@Html.ActionLink("Service Requests", "AllRequests", "Request")</li>
         <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllServices" ? "active" : "")">@Html.ActionLink("Service Plans", "AllServices", "ServicePlan")</li>
+
+
     </ul>
     <div>
         @RenderBody()
