@@ -1,0 +1,29 @@
+﻿@model List<ChurchPlannerApp.Models.Service>
+@{
+    ViewBag.Title = "Service";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            @foreach (var s in Model)
+            {
+                <div class="center-block">
+                    <p>@s.Title</p>
+                    <ul>
+                        <li>Service: @s.ServiceDate</li>
+                        <li>Practice: @s.PracticeDate</li>
+
+
+                        @foreach (var p in s.Team)
+                        {
+                            <li>@p.FName @p.LName</li>
+
+                        }
+                    </ul>
+
+                </div>
+            }
+        </div>
+    </div>
+</div>
