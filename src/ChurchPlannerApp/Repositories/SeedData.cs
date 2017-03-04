@@ -14,7 +14,6 @@ namespace ChurchPlannerApp.Repositories
 
             if (!context.Messages.Any())
             {
-                //TODO Create appsettings.json and add connection string
                 Profile profile = new Profile { FName = "Johnny", LName = "Rocket" };
                 context.Profiles.Add(profile);
 
