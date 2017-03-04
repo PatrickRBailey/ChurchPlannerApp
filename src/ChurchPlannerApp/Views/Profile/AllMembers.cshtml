@@ -1,0 +1,28 @@
+﻿@model List<ChurchPlannerApp.Models.Profile>
+@{
+    ViewBag.Title = "Members";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            @foreach (var p in Model)
+            {
+                <div class="center-block">
+                    <ul>
+                        <li>First Name: @p.FName</li>
+                        <li>Last Name: @p.LName</li>
+
+
+                        @foreach (var i in p.Instruments)
+                        {
+                            <li>@i.Name</li>
+
+                        }
+                    </ul>
+
+                </div>
+            }
+        </div>
+    </div>
+</div>
