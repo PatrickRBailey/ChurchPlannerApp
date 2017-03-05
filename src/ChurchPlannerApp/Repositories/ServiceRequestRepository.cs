@@ -16,7 +16,7 @@ namespace ChurchPlannerApp.Repositories
         }
         public IQueryable<ServiceRequest> GetAllRequests()
         {
-            return context.Requests;
+            return context.Requests.Include(s => s.ServiceR).Include(p => p.ProfileR);
         }
     }
 }

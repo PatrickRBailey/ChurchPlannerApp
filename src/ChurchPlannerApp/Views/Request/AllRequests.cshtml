@@ -9,9 +9,14 @@
             @foreach (var r in Model)
             {
                 <div class="center-block">
-                    <p>
+                    <ul>
+                        <li>@r.Is_Accepted</li>
+                        <li>@r.ServiceR.Title</li>
+                        <li>@r.ProfileR.FName @r.ProfileR.LName</li>
+      
+                    </ul>
 
-                    </p>
+                   
                 </div>
             }
         </div>

@@ -81,22 +81,15 @@ namespace ChurchPlannerApp.Migrations
                     b.Property<int>("ServiceID")
                         .ValueGeneratedOnAdd();
 
-<<<<<<< HEAD
                     b.Property<DateTime>("PracticeDate");
 
                     b.Property<DateTime>("ServiceDate");
-=======
-                    b.Property<DateTime>("Date");
->>>>>>> start to list service requests
 
                     b.Property<string>("Title");
 
                     b.HasKey("ServiceID");
 
-<<<<<<< HEAD
                     b.ToTable("Services");
-=======
-                    b.ToTable("Service");
                 });
 
             modelBuilder.Entity("ChurchPlannerApp.Models.ServiceRequest", b =>
@@ -104,18 +97,19 @@ namespace ChurchPlannerApp.Migrations
                     b.Property<int>("ServiceRequestID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ProfileID");
+                    b.Property<bool>("Is_Accepted");
 
-                    b.Property<int?>("ServiceID");
+                    b.Property<int?>("ProfileRProfileID");
+
+                    b.Property<int?>("ServiceRServiceID");
 
                     b.HasKey("ServiceRequestID");
 
-                    b.HasIndex("ProfileID");
+                    b.HasIndex("ProfileRProfileID");
 
-                    b.HasIndex("ServiceID");
+                    b.HasIndex("ServiceRServiceID");
 
                     b.ToTable("Requests");
->>>>>>> start to list service requests
                 });
 
             modelBuilder.Entity("ChurchPlannerApp.Models.Song", b =>
@@ -146,22 +140,22 @@ namespace ChurchPlannerApp.Migrations
                         .HasForeignKey("FromProfileID");
                 });
 
-<<<<<<< HEAD
             modelBuilder.Entity("ChurchPlannerApp.Models.Profile", b =>
                 {
                     b.HasOne("ChurchPlannerApp.Models.Service")
                         .WithMany("Team")
-=======
+                        .HasForeignKey("ServiceID");
+                });
+
             modelBuilder.Entity("ChurchPlannerApp.Models.ServiceRequest", b =>
                 {
-                    b.HasOne("ChurchPlannerApp.Models.Profile", "Profile")
+                    b.HasOne("ChurchPlannerApp.Models.Profile", "ProfileR")
                         .WithMany()
-                        .HasForeignKey("ProfileID");
+                        .HasForeignKey("ProfileRProfileID");
 
-                    b.HasOne("ChurchPlannerApp.Models.Service", "Service")
+                    b.HasOne("ChurchPlannerApp.Models.Service", "ServiceR")
                         .WithMany()
->>>>>>> start to list service requests
-                        .HasForeignKey("ServiceID");
+                        .HasForeignKey("ServiceRServiceID");
                 });
         }
     }

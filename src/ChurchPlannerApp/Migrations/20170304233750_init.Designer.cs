@@ -8,14 +8,30 @@ using ChurchPlannerApp.Repositories;
 namespace ChurchPlannerApp.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20170304212139_service2")]
-    partial class service2
+    [Migration("20170304233750_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("ChurchPlannerApp.Models.Instrument", b =>
+                {
+                    b.Property<int>("InstrumentID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.Property<int?>("ProfileID");
+
+                    b.HasKey("InstrumentID");
+
+                    b.HasIndex("ProfileID");
+
+                    b.ToTable("Instruments");
+                });
 
             modelBuilder.Entity("ChurchPlannerApp.Models.Message", b =>
                 {
@@ -77,6 +93,26 @@ namespace ChurchPlannerApp.Migrations
                     b.ToTable("Services");
                 });
 
+            modelBuilder.Entity("ChurchPlannerApp.Models.ServiceRequest", b =>
+                {
+                    b.Property<int>("ServiceRequestID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Is_Accepted");
+
+                    b.Property<int?>("ProfileID");
+
+                    b.Property<int?>("ServiceID");
+
+                    b.HasKey("ServiceRequestID");
+
+                    b.HasIndex("ProfileID");
+
+                    b.HasIndex("ServiceID");
+
+                    b.ToTable("Requests");
+                });
+
             modelBuilder.Entity("ChurchPlannerApp.Models.Song", b =>
                 {
                     b.Property<int>("SongID")
@@ -91,6 +127,13 @@ namespace ChurchPlannerApp.Migrations
                     b.ToTable("Songs");
                 });
 
+            modelBuilder.Entity("ChurchPlannerApp.Models.Instrument", b =>
+                {
+                    b.HasOne("ChurchPlannerApp.Models.Profile")
+                        .WithMany("Instruments")
+                        .HasForeignKey("ProfileID");
+                });
+
             modelBuilder.Entity("ChurchPlannerApp.Models.Message", b =>
                 {
                     b.HasOne("ChurchPlannerApp.Models.Profile", "From")
@@ -102,6 +145,17 @@ namespace ChurchPlannerApp.Migrations
                 {
                     b.HasOne("ChurchPlannerApp.Models.Service")
                         .WithMany("Team")
+                        .HasForeignKey("ServiceID");
+                });
+
+            modelBuilder.Entity("ChurchPlannerApp.Models.ServiceRequest", b =>
+                {
+                    b.HasOne("ChurchPlannerApp.Models.Profile", "Profile")
+                        .WithMany()
+                        .HasForeignKey("ProfileID");
+
+                    b.HasOne("ChurchPlannerApp.Models.Service", "Service")
+                        .WithMany()
                         .HasForeignKey("ServiceID");
                 });
         }
