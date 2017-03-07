@@ -10,5 +10,8 @@ namespace ChurchPlannerApp.Repositories
     {
         IQueryable<Song> GetAllSongs();
         int Update(Song song);
+
+        int Delete(Song song);
+
     }
 }

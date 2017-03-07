@@ -12,6 +12,12 @@
                 @foreach (var m in Model)
             {
                     <a href="@m.Url" target="new">@m.Title</a>
+                    <a href="@Url.Action("RemoveSong", "Music",new {id=m.SongID})" class="btn btn-danger center-block" style="margin-top:30px;">
+                        Delete
+                    </a>
+                    <a href="@Url.Action("EditSong", "Music",new {id=m.SongID})" class="btn btn-success center-block" style="margin-top:30px;">
+                        Edit
+                    </a>
                     <br /> 
 
                 }
