@@ -6,6 +6,9 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
+            <a href="@Url.Action("AddSong", "Music")" class="btn btn-success center-block" style="margin-top:30px;">
+                Add a Song
+            </a>
                 @foreach (var m in Model)
             {
                     <a href="@m.Url" target="new">@m.Title</a>
