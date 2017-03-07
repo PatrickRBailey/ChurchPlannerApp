@@ -45,6 +45,7 @@ namespace ChurchPlannerApp.Controllers
             return RedirectToAction("AllSongs", "Music");
         }
 
+
         public IActionResult RemoveSong(int id)
         {
             Song song = (from s in repository.GetAllSongs()
@@ -71,5 +72,6 @@ namespace ChurchPlannerApp.Controllers
 
             return RedirectToAction("AllSongs", "Music");
         }
+
     }
 }
