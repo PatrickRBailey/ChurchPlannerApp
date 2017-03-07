@@ -17,5 +17,15 @@ namespace ChurchPlannerApp.Repositories
         {
             return context.Songs;
         }
+        public int Update(Song song)
+        {
+            if (song.SongID == 0)
+                context.Songs.Add(song);
+            else
+                context.Songs.Update(song);
+
+            return context.SaveChanges();
+
+        }
     }
 }

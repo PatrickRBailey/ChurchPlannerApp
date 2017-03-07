@@ -9,5 +9,6 @@ namespace ChurchPlannerApp.Repositories
     public interface ISong
     {
         IQueryable<Song> GetAllSongs();
+        int Update(Song song);
     }
 }
