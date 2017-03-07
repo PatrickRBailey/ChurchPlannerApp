@@ -14,9 +14,20 @@ namespace ChurchPlannerApp.Repositories
         {
             context = ctx;
         }
+
+        public IQueryable<ServiceRequest> GetAcceptedRequests()
+        {
+            return context.Requests.Include(s => s.ServiceR).Include(p => p.ProfileR).Where(r => r.Is_Accepted == true);
+        }
+
         public IQueryable<ServiceRequest> GetAllRequests()
         {
             return context.Requests.Include(s => s.ServiceR).Include(p => p.ProfileR);
+        }
+
+        public IQueryable<ServiceRequest> GetPendingRequests()
+        {
+            return context.Requests.Include(s => s.ServiceR).Include(p => p.ProfileR).Where(r => r.Is_Accepted == false);
         }
     }
 }

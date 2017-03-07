@@ -16,7 +16,7 @@ namespace ChurchPlannerApp.Repositories
         }
         public IQueryable<Service> GetAllServices()
         {
-            return context.Services.Include(p => p.Team);
+            return context.Services;
         }
     }
 }

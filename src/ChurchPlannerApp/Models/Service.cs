@@ -12,8 +12,6 @@ namespace ChurchPlannerApp.Models
         public string Title { get; set; }
         public DateTime PracticeDate { get; set; }
 
-        private List<Profile> team = new List<Profile>();
-        public List<Profile> Team { get { return team; } }
 
 
     }
