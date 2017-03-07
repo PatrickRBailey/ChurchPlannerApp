@@ -1,1 +1,24 @@
-﻿<h1>This is the Index page</h1>
+﻿@model List<ChurchPlannerApp.Models.ServiceRequest>
+@{
+    ViewBag.Title = "Home";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            @foreach (var r in Model)
+            {
+                <div class="center-block">
+                    <ul>
+                        <li>@r.Is_Accepted</li>
+                        <li>@r.ServiceR.Title</li>
+                        <li>@r.ProfileR.FName @r.ProfileR.LName</li>
+
+                    </ul>
+
+
+                </div>
+            }
+        </div>
+    </div>
+</div>

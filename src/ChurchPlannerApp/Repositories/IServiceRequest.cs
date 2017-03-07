@@ -9,5 +9,7 @@ namespace ChurchPlannerApp.Repositories
     public interface IServiceRequest
     {
         IQueryable<ServiceRequest> GetAllRequests();
+        IQueryable<ServiceRequest> GetAcceptedRequests();
+        IQueryable<ServiceRequest> GetPendingRequests();
     }
 }

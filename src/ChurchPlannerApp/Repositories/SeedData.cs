@@ -24,7 +24,6 @@ namespace ChurchPlannerApp.Repositories
                 ,
                     ServiceDate = DateTime.Parse("3/9/2017")
                 };
-                service.Team.Add(profile);
                 context.Services.Add(service);
 
                 Message message = new Message { Body = "How is everyone doing today?", From = profile };

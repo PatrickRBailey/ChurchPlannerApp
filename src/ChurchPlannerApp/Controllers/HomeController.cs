@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ChurchPlannerApp.Repositories;
 
 
 
@@ -10,10 +11,16 @@ namespace ChurchPlannerApp.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: /<controller>/
-        public IActionResult Index()
+        private IServiceRequest repository;
+
+        public HomeController(IServiceRequest repo)
         {
-            return View();
+            repository = repo;
+        }
+        // GET: /<controller>/
+        public ViewResult Index()
+        {
+            return View(repository.GetAcceptedRequests().ToList());
         }
         
         public IActionResult Admin()
