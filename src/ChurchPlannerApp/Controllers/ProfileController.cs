@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ChurchPlannerApp.Repositories;
+using ChurchPlannerApp.Models;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,6 +21,31 @@ namespace ChurchPlannerApp.Controllers
         public ViewResult AllMembers()
         {
             return View(repository.GetAllProfiles().ToList());
+
+        }
+
+        [HttpGet]
+        public ViewResult AddProfile()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddProfile(Profile p)
+        {
+            var profile = new Profile {
+                FName = p.FName,
+                LName = p.LName,
+                Type = 0,
+                Email = p.Email,
+                PhoneNum = p.PhoneNum,
+                UserName = p.UserName,
+                
+            };
+
+            repository.Update(profile);
+
+            return RedirectToAction("AllMembers", "Profile");
         }
     }
 }

@@ -9,5 +9,6 @@ namespace ChurchPlannerApp.Repositories
     public interface IProfile
     {
         List<Profile> GetAllProfiles();
+        int Update(Profile profile);
     }
 }

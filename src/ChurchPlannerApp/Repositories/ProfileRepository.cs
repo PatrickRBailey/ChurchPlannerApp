@@ -18,5 +18,15 @@ namespace ChurchPlannerApp.Repositories
         {
             return context.Profiles.Include(i => i.Instruments).ToList();
         }
+        public int Update(Profile profile)
+        {
+            if (profile.ProfileID == 0)
+                context.Profiles.Add(profile);
+            else
+                context.Profiles.Update(profile);
+
+            return context.SaveChanges();
+
+        }
     }
 }
