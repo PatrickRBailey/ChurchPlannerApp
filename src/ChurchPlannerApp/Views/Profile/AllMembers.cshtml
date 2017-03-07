@@ -6,6 +6,9 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
+            <a href="@Url.Action("AddProfile", "Profile")" class="btn btn-success center-block" style="margin-top:30px;">
+                Create a Profile
+            </a>
             @foreach (var p in Model)
             {
                 <div class="center-block">
