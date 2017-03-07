@@ -44,5 +44,32 @@ namespace ChurchPlannerApp.Controllers
 
             return RedirectToAction("AllSongs", "Music");
         }
+
+        public IActionResult RemoveSong(int id)
+        {
+            Song song = (from s in repository.GetAllSongs()
+                         where s.SongID == id
+                         select s).FirstOrDefault<Song>();
+            repository.Delete(song);
+            return RedirectToAction("AllSongs", "Music");
+        }
+
+        [HttpGet]
+        public ViewResult EditSong(int id)
+        {
+            var song = (from s in repository.GetAllSongs()
+                        where s.SongID == id
+                        select s).FirstOrDefault<Song>();
+            return View(song);
+        }
+
+        [HttpPost]
+        public IActionResult EditSong(Song s)
+        {
+            
+            repository.Update(s);
+
+            return RedirectToAction("AllSongs", "Music");
+        }
     }
 }
