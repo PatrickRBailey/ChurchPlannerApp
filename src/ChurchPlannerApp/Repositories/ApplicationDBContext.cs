@@ -19,6 +19,6 @@ namespace ChurchPlannerApp.Repositories
         public DbSet<Service> Services { get; set; }
         public DbSet<Instrument> Instruments { get; set; }
         public DbSet<ServiceRequest> Requests { get; set; }
-
+        public DbSet<Profile_Instruments> ProfileInstruments { get; set; }
     }
 }

@@ -12,38 +12,52 @@ namespace ChurchPlannerApp.Controllers
 {
     public class ProfileController : Controller
     {
+        private IProfileInstrument testRepository;
         private IProfile repository;
-        public ProfileController(IProfile repo)
+        private IInstrument InstrumentRepository;
+        public ProfileController(IProfile repo, IInstrument repo2, IProfileInstrument repo3)
         {
             repository = repo;
+            InstrumentRepository = repo2;
+            testRepository = repo3;
         }
         // GET: /<controller>/
         public ViewResult AllMembers()
         {
             return View(repository.GetAllProfiles().ToList());
+            
 
         }
 
         [HttpGet]
         public ViewResult AddProfile()
         {
-            return View();
+            var profileVM = new ProfileViewModel();
+            profileVM.profile = new Models.Profile();
+            profileVM.Instruments = InstrumentRepository.GetAllInstruments().ToList();
+            return View(profileVM);
         }
 
         [HttpPost]
-        public IActionResult AddProfile(Profile p)
+        public IActionResult AddProfile(ProfileViewModel profileVM)
         {
-            var profile = new Profile {
-                FName = p.FName,
-                LName = p.LName,
-                Type = 0,
-                Email = p.Email,
-                PhoneNum = p.PhoneNum,
-                UserName = p.UserName,
-                
-            };
+            repository.Update(profileVM.profile);
+            var instruments = profileVM.Instruments.Where(i => i.Selected == true).ToList();
+            foreach (var i in instruments)
+            {
+                var profileInstrument = new Profile_Instruments();
+                profileInstrument.ProfileID = profileVM.profile.ProfileID;
+                profileInstrument.InstrumentID = i.InstrumentID;
+                testRepository.Update(profileInstrument);
+                //profileVM.Instruments.Add(i);
+                //InstrumentRepository.Update(i);
+                //profileVM.profile.Instruments.Add(i);
 
-            repository.Update(profile);
+            }
+
+            
+            
+
 
             return RedirectToAction("AllMembers", "Profile");
         }

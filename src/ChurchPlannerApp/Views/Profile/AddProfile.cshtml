@@ -1,4 +1,4 @@
-﻿﻿@model ChurchPlannerApp.Models.Profile
+﻿﻿@model ChurchPlannerApp.Models.ProfileViewModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
@@ -8,22 +8,31 @@
 <h1 class="text-center">Create a New Profile</h1>
 <form asp-controller="Profile" asp-action="AddProfile" method="post">
     <div class="form-group center-block">
-        <input asp-for="ProfileID" type="hidden" />
+        <input asp-for="profile.ProfileID" type="hidden" />
 
-        <label asp-for="FName">First Name:</label>
-        <input asp-for="FName" class="form-control" /><br />
+        <label asp-for="profile.FName">First Name:</label>
+        <input asp-for="profile.FName" class="form-control" /><br />
 
-        <label asp-for="LName">Last Name:</label>
-        <input asp-for="LName" class="form-control" /><br />
+        <label asp-for="profile.LName">Last Name:</label>
+        <input asp-for="profile.LName" class="form-control" /><br />
 
-        <label asp-for="UserName">Username:</label>
-        <input asp-for="UserName" class="form-control" /><br />
+        <label asp-for="profile.UserName">Username:</label>
+        <input asp-for="profile.UserName" class="form-control" /><br />
 
-        <label asp-for="Email">Email:</label>
-        <input asp-for="Email" class="form-control" /><br />
+        <label asp-for="profile.Email">Email:</label>
+        <input asp-for="profile.Email" class="form-control" /><br />
 
-        <label asp-for="PhoneNum">Phone Number:</label>
-        <input asp-for="PhoneNum" class="form-control" /><br />
+        <label asp-for="profile.PhoneNum">Phone Number:</label>
+        <input asp-for="profile.PhoneNum" class="form-control" /><br />
+
+        @for (int i = 0; i < Model.Instruments.Count(); i++)
+        {
+            <label asp-for="@Model.Instruments[i].Name">@Model.Instruments[i].Name</label>
+            <input asp-for="@Model.Instruments[i].Selected"  type="checkbox" />
+            <input asp-for="@Model.Instruments[i].InstrumentID" type="hidden" />
+            <input asp-for="@Model.Instruments[i].Name" type="hidden" />
+
+        }
 
         @*
             TODO: Add View Model to pass in instruments here*@

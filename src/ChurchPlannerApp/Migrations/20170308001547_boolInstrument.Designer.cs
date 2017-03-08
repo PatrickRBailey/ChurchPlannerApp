@@ -8,9 +8,10 @@ using ChurchPlannerApp.Repositories;
 namespace ChurchPlannerApp.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20170308001547_boolInstrument")]
+    partial class boolInstrument
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -72,20 +73,6 @@ namespace ChurchPlannerApp.Migrations
                     b.HasKey("ProfileID");
 
                     b.ToTable("Profiles");
-                });
-
-            modelBuilder.Entity("ChurchPlannerApp.Models.Profile_Instruments", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("InstrumentID");
-
-                    b.Property<int>("ProfileID");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("ProfileInstruments");
                 });
 
             modelBuilder.Entity("ChurchPlannerApp.Models.Service", b =>

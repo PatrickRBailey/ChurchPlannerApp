@@ -5,12 +5,10 @@ using System.Threading.Tasks;
 
 namespace ChurchPlannerApp.Models
 {
-    public class Instrument
+    public class Profile_Instruments
     {
+        public int ID { get; set; }
+        public int ProfileID { get; set; }
         public int InstrumentID { get; set; }
-        public string Name { get; set; }
-        public bool Selected { get; set; }
     }
-
 }
-

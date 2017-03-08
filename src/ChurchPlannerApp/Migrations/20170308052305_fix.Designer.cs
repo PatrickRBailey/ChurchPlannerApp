@@ -8,9 +8,10 @@ using ChurchPlannerApp.Repositories;
 namespace ChurchPlannerApp.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20170308052305_fix")]
+    partial class fix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -23,13 +24,9 @@ namespace ChurchPlannerApp.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("ProfileID");
-
                     b.Property<bool>("Selected");
 
                     b.HasKey("InstrumentID");
-
-                    b.HasIndex("ProfileID");
 
                     b.ToTable("Instruments");
                 });
@@ -79,11 +76,15 @@ namespace ChurchPlannerApp.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("InstrumentID");
+                    b.Property<int?>("InstrumentID");
 
-                    b.Property<int>("ProfileID");
+                    b.Property<int?>("PlayerProfileID");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("InstrumentID");
+
+                    b.HasIndex("PlayerProfileID");
 
                     b.ToTable("ProfileInstruments");
                 });
@@ -138,18 +139,22 @@ namespace ChurchPlannerApp.Migrations
                     b.ToTable("Songs");
                 });
 
-            modelBuilder.Entity("ChurchPlannerApp.Models.Instrument", b =>
-                {
-                    b.HasOne("ChurchPlannerApp.Models.Profile")
-                        .WithMany("Instruments")
-                        .HasForeignKey("ProfileID");
-                });
-
             modelBuilder.Entity("ChurchPlannerApp.Models.Message", b =>
                 {
                     b.HasOne("ChurchPlannerApp.Models.Profile", "From")
                         .WithMany()
                         .HasForeignKey("FromProfileID");
+                });
+
+            modelBuilder.Entity("ChurchPlannerApp.Models.Profile_Instruments", b =>
+                {
+                    b.HasOne("ChurchPlannerApp.Models.Instrument", "Instrument")
+                        .WithMany()
+                        .HasForeignKey("InstrumentID");
+
+                    b.HasOne("ChurchPlannerApp.Models.Profile", "Player")
+                        .WithMany()
+                        .HasForeignKey("PlayerProfileID");
                 });
 
             modelBuilder.Entity("ChurchPlannerApp.Models.ServiceRequest", b =>

@@ -8,9 +8,10 @@ using ChurchPlannerApp.Repositories;
 namespace ChurchPlannerApp.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20170308063340_test")]
+    partial class test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -79,11 +80,15 @@ namespace ChurchPlannerApp.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("InstrumentID");
+                    b.Property<int?>("InstrumentID");
 
-                    b.Property<int>("ProfileID");
+                    b.Property<int?>("ProfileID");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("InstrumentID");
+
+                    b.HasIndex("ProfileID");
 
                     b.ToTable("ProfileInstruments");
                 });
@@ -150,6 +155,17 @@ namespace ChurchPlannerApp.Migrations
                     b.HasOne("ChurchPlannerApp.Models.Profile", "From")
                         .WithMany()
                         .HasForeignKey("FromProfileID");
+                });
+
+            modelBuilder.Entity("ChurchPlannerApp.Models.Profile_Instruments", b =>
+                {
+                    b.HasOne("ChurchPlannerApp.Models.Instrument", "Instrument")
+                        .WithMany()
+                        .HasForeignKey("InstrumentID");
+
+                    b.HasOne("ChurchPlannerApp.Models.Profile", "Profile")
+                        .WithMany()
+                        .HasForeignKey("ProfileID");
                 });
 
             modelBuilder.Entity("ChurchPlannerApp.Models.ServiceRequest", b =>

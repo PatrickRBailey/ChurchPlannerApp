@@ -1,0 +1,25 @@
+﻿@model List<ChurchPlannerApp.Models.Instrument>
+@{
+    ViewBag.Title = "Instruments";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <a href="@Url.Action("AddSong", "Music")" class="btn btn-success center-block" style="margin-top:30px;">
+                Add an Instrument
+            </a>
+            <ul>
+                @foreach (var m in Model)
+                {
+                    <li>@m.Name</li>
+                    <a href="@Url.Action("RemoveInstrument", "Instrument",new {id=m.InstrumentID})" class="btn btn-danger center-block" style="margin-top:30px;">
+                        Delete
+                    </a>
+
+                }
+            </ul>
+
+        </div>
+    </div>
+</div>

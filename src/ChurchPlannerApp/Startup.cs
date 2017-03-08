@@ -35,6 +35,9 @@ namespace ChurchPlannerApp
             services.AddTransient<ISong, SongRepository>();
             services.AddTransient<IService, ServiceRepository>();
             services.AddTransient<IServiceRequest, ServiceRequestRepository>();
+            services.AddTransient<IInstrument, InstrumentRepository>();
+            services.AddTransient<IProfileInstrument, ProfileInstrumentRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
