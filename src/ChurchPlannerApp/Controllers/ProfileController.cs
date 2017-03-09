@@ -47,5 +47,14 @@ namespace ChurchPlannerApp.Controllers
 
             return RedirectToAction("AllMembers", "Profile");
         }
+        public IActionResult RemoveProfile(int id)
+        {
+            Profile profile = (from p in repository.GetAllProfiles()
+                               where p.ProfileID == id
+                               select p).FirstOrDefault<Profile>();
+
+            repository.Delete(profile);
+            return RedirectToAction("AllMembers", "Profile");
+        }
     }
 }

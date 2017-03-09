@@ -14,6 +14,13 @@ namespace ChurchPlannerApp.Repositories
         {
             context = ctx;
         }
+
+        public int Delete(Profile profile)
+        {
+            context.Profiles.Remove(profile);
+            return context.SaveChanges();
+        }
+
         public List<Profile> GetAllProfiles()
         {
             return context.Profiles.ToList();
