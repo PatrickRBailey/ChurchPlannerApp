@@ -16,7 +16,7 @@ namespace ChurchPlannerApp.Repositories
         }
         public List<Profile> GetAllProfiles()
         {
-            return context.Profiles.Include(i => i.Instruments).ToList();
+            return context.Profiles.ToList();
         }
         public int Update(Profile profile)
         {
