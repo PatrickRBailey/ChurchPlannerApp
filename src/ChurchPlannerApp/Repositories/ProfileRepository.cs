@@ -22,10 +22,6 @@ namespace ChurchPlannerApp.Repositories
         {
             if (profile.ProfileID == 0)
             {
-                foreach (var i in profile.Instruments)
-                {
-                    context.Instruments.Update(i);
-                }
                 context.Profiles.Add(profile);
             }
             else

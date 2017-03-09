@@ -27,7 +27,6 @@ namespace ChurchPlannerApp
             services.AddDbContext<ApplicationDBContext>(opts =>
                 opts.UseSqlServer(
                     Configuration["Data:ChurchPlanner:ConnectionString"]));
-            //TODO Add Code here to connect to LocalDB
             services.AddMvc();
 
             services.AddTransient<IMessage, MessageRepository>();
@@ -36,7 +35,7 @@ namespace ChurchPlannerApp
             services.AddTransient<IService, ServiceRepository>();
             services.AddTransient<IServiceRequest, ServiceRequestRepository>();
             services.AddTransient<IInstrument, InstrumentRepository>();
-            services.AddTransient<IProfileInstrument, ProfileInstrumentRepository>();
+
 
         }
 

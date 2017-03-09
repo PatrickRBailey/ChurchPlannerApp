@@ -13,6 +13,11 @@
                 @foreach (var m in Model)
                 {
                     <li>@m.Name</li>
+                    @foreach  (var p in m.Profiles)
+                    {
+                        <li>@p.FName</li>
+
+                    }
                     <a href="@Url.Action("RemoveInstrument", "Instrument",new {id=m.InstrumentID})" class="btn btn-danger center-block" style="margin-top:30px;">
                         Delete
                     </a>

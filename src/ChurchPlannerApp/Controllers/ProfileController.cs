@@ -12,19 +12,18 @@ namespace ChurchPlannerApp.Controllers
 {
     public class ProfileController : Controller
     {
-        private IProfileInstrument testRepository;
         private IProfile repository;
         private IInstrument InstrumentRepository;
-        public ProfileController(IProfile repo, IInstrument repo2, IProfileInstrument repo3)
+        public ProfileController(IProfile repo, IInstrument repo2)
         {
             repository = repo;
             InstrumentRepository = repo2;
-            testRepository = repo3;
         }
         // GET: /<controller>/
         public ViewResult AllMembers()
         {
             return View(repository.GetAllProfiles().ToList());
+            
             
 
         }
@@ -41,22 +40,20 @@ namespace ChurchPlannerApp.Controllers
         [HttpPost]
         public IActionResult AddProfile(ProfileViewModel profileVM)
         {
+            
             repository.Update(profileVM.profile);
             var instruments = profileVM.Instruments.Where(i => i.Selected == true).ToList();
             foreach (var i in instruments)
             {
-                var profileInstrument = new Profile_Instruments();
-                profileInstrument.ProfileID = profileVM.profile.ProfileID;
-                profileInstrument.InstrumentID = i.InstrumentID;
-                testRepository.Update(profileInstrument);
-                //profileVM.Instruments.Add(i);
-                //InstrumentRepository.Update(i);
-                //profileVM.profile.Instruments.Add(i);
+                i.Profiles.Add(profileVM.profile);
+                InstrumentRepository.Update(i);
+
 
             }
+            
 
-            
-            
+
+
 
 
             return RedirectToAction("AllMembers", "Profile");

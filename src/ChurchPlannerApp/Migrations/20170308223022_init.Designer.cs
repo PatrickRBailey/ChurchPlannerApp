@@ -8,7 +8,7 @@ using ChurchPlannerApp.Repositories;
 namespace ChurchPlannerApp.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20170304233750_init")]
+    [Migration("20170308223022_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,11 +24,9 @@ namespace ChurchPlannerApp.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("ProfileID");
+                    b.Property<bool>("Selected");
 
                     b.HasKey("InstrumentID");
-
-                    b.HasIndex("ProfileID");
 
                     b.ToTable("Instruments");
                 });
@@ -64,17 +62,31 @@ namespace ChurchPlannerApp.Migrations
 
                     b.Property<int>("PhoneNum");
 
-                    b.Property<int?>("ServiceID");
-
                     b.Property<int>("Type");
 
                     b.Property<string>("UserName");
 
                     b.HasKey("ProfileID");
 
-                    b.HasIndex("ServiceID");
-
                     b.ToTable("Profiles");
+                });
+
+            modelBuilder.Entity("ChurchPlannerApp.Models.ProfileInstruments", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("InstrumentID");
+
+                    b.Property<int?>("ProfileID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("InstrumentID");
+
+                    b.HasIndex("ProfileID");
+
+                    b.ToTable("ProfileInstruments");
                 });
 
             modelBuilder.Entity("ChurchPlannerApp.Models.Service", b =>
@@ -100,15 +112,15 @@ namespace ChurchPlannerApp.Migrations
 
                     b.Property<bool>("Is_Accepted");
 
-                    b.Property<int?>("ProfileID");
+                    b.Property<int?>("ProfileRProfileID");
 
-                    b.Property<int?>("ServiceID");
+                    b.Property<int?>("ServiceRServiceID");
 
                     b.HasKey("ServiceRequestID");
 
-                    b.HasIndex("ProfileID");
+                    b.HasIndex("ProfileRProfileID");
 
-                    b.HasIndex("ServiceID");
+                    b.HasIndex("ServiceRServiceID");
 
                     b.ToTable("Requests");
                 });
@@ -127,13 +139,6 @@ namespace ChurchPlannerApp.Migrations
                     b.ToTable("Songs");
                 });
 
-            modelBuilder.Entity("ChurchPlannerApp.Models.Instrument", b =>
-                {
-                    b.HasOne("ChurchPlannerApp.Models.Profile")
-                        .WithMany("Instruments")
-                        .HasForeignKey("ProfileID");
-                });
-
             modelBuilder.Entity("ChurchPlannerApp.Models.Message", b =>
                 {
                     b.HasOne("ChurchPlannerApp.Models.Profile", "From")
@@ -141,22 +146,26 @@ namespace ChurchPlannerApp.Migrations
                         .HasForeignKey("FromProfileID");
                 });
 
-            modelBuilder.Entity("ChurchPlannerApp.Models.Profile", b =>
+            modelBuilder.Entity("ChurchPlannerApp.Models.ProfileInstruments", b =>
                 {
-                    b.HasOne("ChurchPlannerApp.Models.Service")
-                        .WithMany("Team")
-                        .HasForeignKey("ServiceID");
+                    b.HasOne("ChurchPlannerApp.Models.Instrument", "Instrument")
+                        .WithMany("ProfileInstruments")
+                        .HasForeignKey("InstrumentID");
+
+                    b.HasOne("ChurchPlannerApp.Models.Profile", "Profile")
+                        .WithMany("ProfileInstruments")
+                        .HasForeignKey("ProfileID");
                 });
 
             modelBuilder.Entity("ChurchPlannerApp.Models.ServiceRequest", b =>
                 {
-                    b.HasOne("ChurchPlannerApp.Models.Profile", "Profile")
+                    b.HasOne("ChurchPlannerApp.Models.Profile", "ProfileR")
                         .WithMany()
-                        .HasForeignKey("ProfileID");
+                        .HasForeignKey("ProfileRProfileID");
 
-                    b.HasOne("ChurchPlannerApp.Models.Service", "Service")
+                    b.HasOne("ChurchPlannerApp.Models.Service", "ServiceR")
                         .WithMany()
-                        .HasForeignKey("ServiceID");
+                        .HasForeignKey("ServiceRServiceID");
                 });
         }
     }

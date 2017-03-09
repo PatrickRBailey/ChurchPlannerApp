@@ -8,8 +8,8 @@ using ChurchPlannerApp.Repositories;
 namespace ChurchPlannerApp.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20170308070208_testagain")]
-    partial class testagain
+    [Migration("20170308234726_many")]
+    partial class many
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,13 +24,9 @@ namespace ChurchPlannerApp.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("ProfileID");
-
                     b.Property<bool>("Selected");
 
                     b.HasKey("InstrumentID");
-
-                    b.HasIndex("ProfileID");
 
                     b.ToTable("Instruments");
                 });
@@ -62,6 +58,8 @@ namespace ChurchPlannerApp.Migrations
 
                     b.Property<string>("FName");
 
+                    b.Property<int?>("InstrumentID");
+
                     b.Property<string>("LName");
 
                     b.Property<int>("PhoneNum");
@@ -72,19 +70,25 @@ namespace ChurchPlannerApp.Migrations
 
                     b.HasKey("ProfileID");
 
+                    b.HasIndex("InstrumentID");
+
                     b.ToTable("Profiles");
                 });
 
-            modelBuilder.Entity("ChurchPlannerApp.Models.Profile_Instruments", b =>
+            modelBuilder.Entity("ChurchPlannerApp.Models.ProfileInstruments", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("InstrumentID");
+                    b.Property<int?>("InstrumentID");
 
-                    b.Property<int>("ProfileID");
+                    b.Property<int?>("ProfileID");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("InstrumentID");
+
+                    b.HasIndex("ProfileID");
 
                     b.ToTable("ProfileInstruments");
                 });
@@ -139,18 +143,29 @@ namespace ChurchPlannerApp.Migrations
                     b.ToTable("Songs");
                 });
 
-            modelBuilder.Entity("ChurchPlannerApp.Models.Instrument", b =>
-                {
-                    b.HasOne("ChurchPlannerApp.Models.Profile")
-                        .WithMany("Instruments")
-                        .HasForeignKey("ProfileID");
-                });
-
             modelBuilder.Entity("ChurchPlannerApp.Models.Message", b =>
                 {
                     b.HasOne("ChurchPlannerApp.Models.Profile", "From")
                         .WithMany()
                         .HasForeignKey("FromProfileID");
+                });
+
+            modelBuilder.Entity("ChurchPlannerApp.Models.Profile", b =>
+                {
+                    b.HasOne("ChurchPlannerApp.Models.Instrument")
+                        .WithMany("Profiles")
+                        .HasForeignKey("InstrumentID");
+                });
+
+            modelBuilder.Entity("ChurchPlannerApp.Models.ProfileInstruments", b =>
+                {
+                    b.HasOne("ChurchPlannerApp.Models.Instrument", "Instrument")
+                        .WithMany()
+                        .HasForeignKey("InstrumentID");
+
+                    b.HasOne("ChurchPlannerApp.Models.Profile", "Profile")
+                        .WithMany()
+                        .HasForeignKey("ProfileID");
                 });
 
             modelBuilder.Entity("ChurchPlannerApp.Models.ServiceRequest", b =>
