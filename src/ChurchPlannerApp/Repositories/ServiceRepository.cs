@@ -14,9 +14,26 @@ namespace ChurchPlannerApp.Repositories
         {
             context = ctx;
         }
+
+        public int Delete(Service service)
+        {
+            context.Services.Remove(service);
+            return context.SaveChanges();
+        }
+
         public IQueryable<Service> GetAllServices()
         {
             return context.Services;
+        }
+
+        public int Update(Service service)
+        {
+            if (service.ServiceID == 0)
+                context.Services.Add(service);
+            else
+                context.Services.Update(service);
+
+            return context.SaveChanges();
         }
     }
 }
