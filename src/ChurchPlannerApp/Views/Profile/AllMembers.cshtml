@@ -15,6 +15,13 @@
                     <ul>
                         <li>First Name: @p.FName</li>
                         <li>Last Name: @p.LName</li>
+                        <a href="@Url.Action("RemoveProfile", "Profile",new {id=p.ProfileID})" class="btn btn-danger center-block" style="margin-top:30px;">
+                            Delete
+                        </a>
+
+                        <a href="@Url.Action("EditProfile", "Profile",new {id=p.ProfileID})" class="btn btn-success center-block" style="margin-top:30px;">
+                            Edit
+                        </a>
 
                     </ul>
 

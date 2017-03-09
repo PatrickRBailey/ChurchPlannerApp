@@ -10,5 +10,6 @@ namespace ChurchPlannerApp.Repositories
     {
         List<Profile> GetAllProfiles();
         int Update(Profile profile);
+        int Delete(Profile profile);
     }
 }
