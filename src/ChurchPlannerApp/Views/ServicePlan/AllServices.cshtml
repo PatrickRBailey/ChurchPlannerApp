@@ -6,6 +6,9 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
+            <a href="@Url.Action("AddService", "ServicePlan")" class="btn btn-success center-block" style="margin-top:30px;">
+                Create a Service
+            </a>
             @foreach (var s in Model)
             {
                 <div class="center-block">
@@ -13,6 +16,9 @@
                     <ul>
                         <li>Service: @s.ServiceDate</li>
                         <li>Practice: @s.PracticeDate</li>
+                        <a href="@Url.Action("RemoveService", "ServicePlan",new {id=s.ServiceID})" class="btn btn-danger center-block" style="margin-top:30px;">
+                            Delete
+                        </a>
                     </ul>
 
                 </div>
