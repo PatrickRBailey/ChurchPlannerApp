@@ -53,5 +53,24 @@ namespace ChurchPlannerApp.Controllers
             repository.Delete(service);
             return RedirectToAction("AllServices", "ServicePlan");
         }
+
+        [HttpGet]
+        public ViewResult EditService(int id)
+        {
+            var service = (from s in repository.GetAllServices()
+                           where s.ServiceID == id
+                           select s).FirstOrDefault<Service>();
+
+            return View(service);
+        }
+
+        [HttpPost]
+        public IActionResult EditService(Service s)
+        {
+
+            repository.Update(s);
+
+            return RedirectToAction("AllServices", "ServicePlan");
+        }
     }
 }
