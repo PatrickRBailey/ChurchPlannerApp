@@ -20,6 +20,9 @@
                                 <a href="@Url.Action("AcceptRequest", "Request", new { PID = sr.ProfileID, SID = sr.ServiceID })" class="btn btn-success center-block" style="margin-top:30px;">
                                     Accept
                                 </a>
+                                <a href="@Url.Action("DeclineRequest", "Request", new { PID = sr.ProfileID, SID = sr.ServiceID })" class="btn btn-danger center-block" style="margin-top:30px;">
+                                    Decline
+                                </a>
                             }
                         }
 

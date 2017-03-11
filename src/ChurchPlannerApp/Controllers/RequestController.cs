@@ -41,6 +41,19 @@ namespace ChurchPlannerApp.Controllers
             return RedirectToAction("AllRequests", "Request");
         }
 
+        public IActionResult DeclineRequest(int PID, int SID)
+        {
+            var GetProfile = (from p in repository.GetAllProfiles()
+                              where p.ProfileID == PID
+                              select p).FirstOrDefault<Profile>();
+
+            var request = GetProfile.ServiceRequests.Where(s => s.ServiceID == SID).FirstOrDefault<ServiceRequest>();
+            GetProfile.ServiceRequests.Remove(request);
+            repository.Update(GetProfile);
+
+            return RedirectToAction("AllRequests", "Request");
+        }
+
 
     }
 }
