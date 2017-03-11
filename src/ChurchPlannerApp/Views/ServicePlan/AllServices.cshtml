@@ -16,6 +16,12 @@
                     <ul>
                         <li>Service: @s.ServiceDate</li>
                         <li>Practice: @s.PracticeDate</li>
+
+                        <a href="@Url.Action("AddMembers", "ServicePlan",new { serviceID = s.ServiceID })" class="btn btn-success center-block" style="margin-top:30px;">
+                            Add Members
+                        </a>
+
+
                         <a href="@Url.Action("RemoveService", "ServicePlan",new {id=s.ServiceID})" class="btn btn-danger center-block" style="margin-top:30px;">
                             Delete
                         </a>

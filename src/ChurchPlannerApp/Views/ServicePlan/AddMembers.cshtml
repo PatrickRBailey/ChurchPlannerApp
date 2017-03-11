@@ -1,0 +1,28 @@
+﻿﻿@model ChurchPlannerApp.Models.AddMembersVM
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewBag.Title = "Add Members";
+}
+
+<h1 class="text-center">Add Members to the Service</h1>
+<form asp-controller="ServicePlan" asp-action="AddMembers" method="post">
+    <input type="hidden" asp-for="Service.ServiceID" />
+    <div class="form-group center-block">
+        @for (var p = 0; p < Model.Profiles.Count; p++)
+        {
+            <label asp-for="@Model.Profiles[p].IsSelected">@Model.Profiles[p].FName @Model.Profiles[p].LName</label>
+            <input type="checkbox" asp-for="@Model.Profiles[p].IsSelected" />    
+            <input type="hidden" asp-for="@Model.Profiles[p].ProfileID" />
+
+
+
+        }
+
+
+
+
+
+        <button type="submit" class="btn btn-primary pull-right">Create Service</button>
+    </div>
+</form>

@@ -12,14 +12,20 @@
                     <ul>
                         @foreach (var sr in p.ServiceRequests)
                         {
-                            <li>@sr.Is_Accepted</li>
-                            <li>@sr.ServiceR.Title</li>
-                            <li>@sr.ProfileR.FName @sr.ProfileR.LName</li>
+                            @if (sr.Is_Accepted == false)
+                            {
+                                <li>@sr.Is_Accepted</li>
+                                <li>@sr.ServiceR.Title</li>
+                                <li>@sr.ProfileR.FName @sr.ProfileR.LName</li>
+                                <a href="@Url.Action("AcceptRequest", "Request", new { PID = sr.ProfileID, SID = sr.ServiceID })" class="btn btn-success center-block" style="margin-top:30px;">
+                                    Accept
+                                </a>
+                            }
                         }
 
                     </ul>
 
-                   
+
                 </div>
             }
         </div>
