@@ -13,11 +13,13 @@ namespace ChurchPlannerApp.Controllers
     public class ServicePlanController : Controller
     {
         private IService repository;
+        private IProfile pRepository;
 
 
-        public ServicePlanController(IService repo)
+        public ServicePlanController(IService repo, IProfile pRepo)
         {
             repository = repo;
+            pRepository = pRepo;
         }
         // GET: /<controller>/
         public ViewResult AllServices()
@@ -70,6 +72,56 @@ namespace ChurchPlannerApp.Controllers
         {
 
             repository.Update(s);
+
+            return RedirectToAction("AllServices", "ServicePlan");
+        }
+
+        [HttpGet]
+        public ViewResult AddMembers(int serviceID)
+        {
+            var service = (from s in repository.GetAllServices()
+                           where s.ServiceID == serviceID
+                           select s).FirstOrDefault<Service>();
+
+            var vm = new AddMembersVM();
+            vm.Service = (service);
+            vm.Profiles = pRepository.GetAllProfiles().ToList();
+            return View(vm);
+        }
+
+        [HttpPost]
+        public IActionResult AddMembers(AddMembersVM vm)
+        {
+            //vm.Profiles = pRepository.GetAllProfiles().ToList();
+            var service = vm.Service;
+
+            
+            var selectedProfiles = vm.Profiles.Where(p => p.IsSelected == true);
+            foreach (var profile in selectedProfiles)
+            {
+                var request = new ServiceRequest();
+                request.ProfileID = profile.ProfileID;
+                request.ServiceID = service.ServiceID;
+
+                var Getservice = (from s in repository.GetAllServices()
+                                 where s.ServiceID == request.ServiceID
+                                 select s).FirstOrDefault<Service>();
+
+                var GetProfile = (from p in pRepository.GetAllProfiles()
+                                  where p.ProfileID == request.ProfileID
+                                  select p).FirstOrDefault<Profile>();
+
+                request.ProfileR = GetProfile;
+                
+                request.ServiceR = Getservice;
+                
+
+                
+                GetProfile.ServiceRequests.Add(request);
+                pRepository.Update(GetProfile);
+            }
+            
+
 
             return RedirectToAction("AllServices", "ServicePlan");
         }

@@ -23,7 +23,7 @@ namespace ChurchPlannerApp.Repositories
 
         public List<Profile> GetAllProfiles()
         {
-            return context.Profiles.ToList();
+            return context.Profiles.Include(p => p.ServiceRequests).ToList();
         }
         public int Update(Profile profile)
         {
