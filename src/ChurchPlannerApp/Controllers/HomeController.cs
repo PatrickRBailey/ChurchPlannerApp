@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ChurchPlannerApp.Repositories;
+using ChurchPlannerApp.Models;
 
 
 
@@ -11,16 +12,21 @@ namespace ChurchPlannerApp.Controllers
 {
     public class HomeController : Controller
     {
-        private IServiceRequest repository;
+        private IProfile Prepository;
+        private IService Srepository;
 
-        public HomeController(IServiceRequest repo)
+        public HomeController(IProfile Prepo, IService Srepo)
         {
-            repository = repo;
+            Prepository = Prepo;
+            Srepository = Srepo;
         }
         // GET: /<controller>/
         public ViewResult Index()
         {
-            return View();
+            var vm = new ProfileServiceViewModel();
+            vm.Profiles = Prepository.GetAllProfiles().ToList();
+            vm.Services = Srepository.GetAllServices().ToList();
+            return View(vm);
         }
         
         public IActionResult Admin()

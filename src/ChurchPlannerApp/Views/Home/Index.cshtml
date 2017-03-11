@@ -1,1 +1,31 @@
-﻿
+﻿@model ChurchPlannerApp.Models.ProfileServiceViewModel
+@{
+    ViewBag.Title = "Accepted Requests";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            @foreach (var p in Model.Profiles)
+            {
+                <div class="center-block">
+                    <ul>
+                        @foreach (var sr in p.ServiceRequests)
+                        {
+                            @if (sr.Is_Accepted == true)
+                            {
+                                <li>@sr.Is_Accepted</li>
+                                <li>@sr.ServiceR.Title</li>
+                                <li>@sr.ProfileR.FName @sr.ProfileR.LName</li>
+
+                            }
+                        }
+
+                    </ul>
+
+
+                </div>
+            }
+        </div>
+    </div>
+</div>
