@@ -11,8 +11,9 @@ namespace ChurchPlannerApp.Models
         public DateTime ServiceDate { get; set; }
         public string Title { get; set; }
         public DateTime PracticeDate { get; set; }
-        private List<Profile> profiles = new List<Profile>();
-        public List<Profile> Profiles { get { return profiles; } }
+        public bool IsSelected { get; set;}
+        public List<ServiceRequest> ServiceRequests { get; set; }
+
 
 
 

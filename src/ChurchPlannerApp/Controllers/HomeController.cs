@@ -20,7 +20,7 @@ namespace ChurchPlannerApp.Controllers
         // GET: /<controller>/
         public ViewResult Index()
         {
-            return View(repository.GetAcceptedRequests().ToList());
+            return View();
         }
         
         public IActionResult Admin()

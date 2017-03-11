@@ -14,6 +14,8 @@ namespace ChurchPlannerApp.Models
         public int PhoneNum { get; set; }
         public string Email { get; set; }
         public int Type { get; set; }
+        public bool IsSelected { get; set; }
+        public List<ServiceRequest> ServiceRequests { get; set; }
 
     }
 }

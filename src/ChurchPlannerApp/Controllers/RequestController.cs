@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ChurchPlannerApp.Repositories;
+using ChurchPlannerApp.Models;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,16 +12,23 @@ namespace ChurchPlannerApp.Controllers
 {
     public class RequestController : Controller
     {
-        private IServiceRequest repository;
+        private IProfile repository;
+        private IService sRepository;
 
-        public RequestController(IServiceRequest repo)
+        public RequestController(IProfile repo, IService sRepo)
         {
             repository = repo;
+            sRepository = sRepo;
         }
         // GET: /<controller>/
         public ViewResult AllRequests()
         {
-            return View(repository.GetPendingRequests().ToList());
+            var vm = new ProfileServiceViewModel();
+            vm.Profiles = repository.GetAllProfiles().ToList();
+            vm.Services = sRepository.GetAllServices().ToList();
+            return View(vm);
         }
+
+     
     }
 }

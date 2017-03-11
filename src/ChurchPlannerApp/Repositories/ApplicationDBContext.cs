@@ -18,7 +18,21 @@ namespace ChurchPlannerApp.Repositories
         public DbSet<Song> Songs { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Instrument> Instruments { get; set; }
-        public DbSet<ServiceRequest> Requests { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ServiceRequest>()
+                .HasKey(s => new { s.ServiceID, s.ProfileID });
+
+            modelBuilder.Entity<ServiceRequest>()
+                .HasOne(sr => sr.ProfileR)
+                .WithMany(p => p.ServiceRequests)
+                .HasForeignKey(sr => sr.ProfileID);
+
+            modelBuilder.Entity<ServiceRequest>()
+                .HasOne(sr => sr.ServiceR)
+                .WithMany(s => s.ServiceRequests)
+                .HasForeignKey(sr => sr.ServiceID);
+        }
 
     }
 }
