@@ -10,11 +10,17 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
     <style>
         body{ 
+            background-color:#f5f5f5; 
 
         }
         .panel-heading{
             padding: 10px;
             height: 120px;
+        }
+
+        .requestPanel{
+            height: 200px;
+
         }
 
         .songs {
@@ -40,7 +46,6 @@
     </style>
 </head>
 <body>
-    @*TODO: Make Interactive Navbar*@
     <ul class="nav nav-tabs">
         <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Home", "Index", "Home")</li>
         <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllMessages" ? "active" : "")">@Html.ActionLink("Forum", "AllMessages", "Forum")</li>

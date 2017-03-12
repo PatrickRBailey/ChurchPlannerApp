@@ -9,28 +9,36 @@
             @foreach (var p in Model.Profiles)
             {
                 <div class="center-block">
-                    <ul>
-                        @foreach (var sr in p.ServiceRequests)
+                    @foreach (var sr in p.ServiceRequests)
+                    {
+                        @if (sr.Is_Accepted == false)
                         {
-                            @if (sr.Is_Accepted == false)
-                            {
-                                <li>@sr.Is_Accepted</li>
-                                <li>@sr.ServiceR.Title</li>
-                                <li>@sr.ProfileR.FName @sr.ProfileR.LName</li>
-                                <a href="@Url.Action("AcceptRequest", "Request", new { PID = sr.ProfileID, SID = sr.ServiceID })" class="btn btn-success center-block" style="margin-top:30px;">
-                                    Accept
-                                </a>
-                                <a href="@Url.Action("DeclineRequest", "Request", new { PID = sr.ProfileID, SID = sr.ServiceID })" class="btn btn-danger center-block" style="margin-top:30px;">
-                                    Decline
-                                </a>
-                            }
+                            <div class="panel-group">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading requestPanel">
+                                        <h3>@sr.ProfileR.FName @sr.ProfileR.LName</h3>
+                                        <h4>@sr.ServiceR.Title</h4>
+                                        <p>
+                                            Rehersal: @sr.ServiceR.PracticeDate<br />
+                                            Service: @sr.ServiceR.ServiceDate
+                                        </p>
+                                        <a href="@Url.Action("AcceptRequest", "Request", new { PID = sr.ProfileID, SID = sr.ServiceID })" class="btn btn-success">
+                                            Accept
+                                        </a>
+                                        <a href="@Url.Action("DeclineRequest", "Request", new { PID = sr.ProfileID, SID = sr.ServiceID })" class="btn btn-danger">
+                                            Decline
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         }
-
-                    </ul>
-
-
+                    }
                 </div>
+
             }
         </div>
     </div>
 </div>
+
