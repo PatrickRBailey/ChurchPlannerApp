@@ -9,39 +9,50 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
     <style>
-        body{ 
-            background-color:#f5f5f5; 
-
+        body {
+            background-color: #f5f5f5;
         }
-        .panel-heading{
+        .addSong{
+            width: 80%;
+        }
+
+        .addMemberBtn{
+            margin-right:170px;
+        }
+
+        .form-control {
+            width: 100%;
+        }
+
+        .panel-heading {
             padding: 10px;
             height: 120px;
         }
 
-        .requestPanel{
+        .requestPanel {
             height: 200px;
-
         }
 
         .songs {
-            font-size:large;
-            border:1px inset #eeeeee;
-            padding:30px;
-            margin:10px;
+            font-size: large;
+            border: 1px inset #eeeeee;
+            padding: 30px;
+            margin: 10px;
             margin-bottom: 20px;
         }
 
         .messages {
-            margin-bottom:20px;
+            margin-bottom: 20px;
             width: 100%;
             background-color: #fff;
             position: relative;
             float: left;
             border: solid #d7ccc8 .5px;
             padding: 10px;
-}
-        .container{
-            margin-top:50px;
+        }
+
+        .container {
+            margin-top: 50px;
         }
     </style>
 </head>
@@ -57,7 +68,13 @@
 
     </ul>
     <div>
-        @RenderBody()
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
