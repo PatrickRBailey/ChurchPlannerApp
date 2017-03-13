@@ -1,31 +1,41 @@
 ﻿@model ChurchPlannerApp.Models.ProfileServiceViewModel
 @{
-    ViewBag.Title = "Accepted Requests";
+    ViewBag.Title = "Home";
 }
-
-<div class="container">
-    <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
-            @foreach (var p in Model.Profiles)
+            @foreach (var s in Model.Services)
             {
-                <div class="center-block">
-                    <ul>
-                        @foreach (var sr in p.ServiceRequests)
-                        {
-                            @if (sr.Is_Accepted == true)
-                            {
-                                <li>@sr.Is_Accepted</li>
-                                <li>@sr.ServiceR.Title</li>
-                                <li>@sr.ProfileR.FName @sr.ProfileR.LName</li>
+                <div class="panel-group">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <button type="button" class="btn btn-default btn-sm pull-right"data-toggle="collapse" 
+                                    href="#serviceCollapse_@s.ServiceID" aria-label="Right Align">
+                                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                            </button>
+                            <h1 class="panel-title lead">@s.Title</h1><br /><br />
+                            <p class="pull-right">
+                                <em>Practice Date: @s.PracticeDate</em><br />
+                                <em>Service Date @s.ServiceDate</em>
+                            </p>
+                        </div>
 
-                            }
-                        }
+                        <div id="serviceCollapse_@s.ServiceID" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <h4><b>Team:</b></h4>
+                                <ul style="list-style-type: none;">
+                                    @foreach (var p in s.ServiceRequests)
+                                    {
+                                        @if (p.ServiceID == s.ServiceID && p.Is_Accepted == true)
+                                        {
+                                            <li>@p.ProfileR.FName @p.ProfileR.LName</li>
 
-                    </ul>
+                                        }
 
+                                    }
 
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             }
-        </div>
-    </div>
-</div>

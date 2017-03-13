@@ -24,7 +24,10 @@ namespace ChurchPlannerApp.Controllers
         // GET: /<controller>/
         public ViewResult AllServices()
         {
-            return View(repository.GetAllServices().ToList());
+            var vm = new ProfileServiceViewModel();
+            vm.Profiles = pRepository.GetAllProfiles().ToList();
+            vm.Services = repository.GetAllServices().ToList();
+            return View(vm);
         }
 
         [HttpGet]
