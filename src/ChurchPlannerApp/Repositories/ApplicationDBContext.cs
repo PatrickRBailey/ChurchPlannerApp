@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ChurchPlannerApp.Models;
-
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace ChurchPlannerApp.Repositories
 {
@@ -32,6 +32,13 @@ namespace ChurchPlannerApp.Repositories
                 .HasOne(sr => sr.ServiceR)
                 .WithMany(s => s.ServiceRequests)
                 .HasForeignKey(sr => sr.ServiceID);
+
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Ignore<IdentityUserLogin<string>>();
+            modelBuilder.Ignore<IdentityUserRole<string>>();
+            modelBuilder.Ignore<IdentityUserClaim<string>>();
+            modelBuilder.Ignore<IdentityUserToken<string>>();
+            modelBuilder.Ignore<IdentityUser<string>>();
         }
 
     }

@@ -8,9 +8,10 @@ using ChurchPlannerApp.Repositories;
 namespace ChurchPlannerApp.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20170316054631_profile")]
+    partial class profile
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -46,52 +47,10 @@ namespace ChurchPlannerApp.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("ChurchPlannerApp.Models.MusicUser", b =>
-                {
-                    b.Property<int>("MusicUserID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccessFailedCount");
-
-                    b.Property<string>("ConcurrencyStamp");
-
-                    b.Property<string>("Email");
-
-                    b.Property<bool>("EmailConfirmed");
-
-                    b.Property<string>("Id");
-
-                    b.Property<bool>("LockoutEnabled");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("NormalizedEmail");
-
-                    b.Property<string>("NormalizedUserName");
-
-                    b.Property<string>("PasswordHash");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<bool>("PhoneNumberConfirmed");
-
-                    b.Property<string>("SecurityStamp");
-
-                    b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<string>("UserName");
-
-                    b.HasKey("MusicUserID");
-
-                    b.ToTable("MusicUser");
-                });
-
             modelBuilder.Entity("ChurchPlannerApp.Models.Profile", b =>
                 {
                     b.Property<int>("ProfileID")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Email");
 
                     b.Property<string>("FName");
 
@@ -99,17 +58,7 @@ namespace ChurchPlannerApp.Migrations
 
                     b.Property<string>("LName");
 
-                    b.Property<int>("PhoneNum");
-
-                    b.Property<int>("Type");
-
-                    b.Property<int?>("UserMusicUserID");
-
-                    b.Property<string>("UserName");
-
                     b.HasKey("ProfileID");
-
-                    b.HasIndex("UserMusicUserID");
 
                     b.ToTable("Profiles");
                 });
@@ -168,13 +117,6 @@ namespace ChurchPlannerApp.Migrations
                     b.HasOne("ChurchPlannerApp.Models.Profile", "From")
                         .WithMany()
                         .HasForeignKey("FromProfileID");
-                });
-
-            modelBuilder.Entity("ChurchPlannerApp.Models.Profile", b =>
-                {
-                    b.HasOne("ChurchPlannerApp.Models.MusicUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserMusicUserID");
                 });
 
             modelBuilder.Entity("ChurchPlannerApp.Models.ServiceRequest", b =>

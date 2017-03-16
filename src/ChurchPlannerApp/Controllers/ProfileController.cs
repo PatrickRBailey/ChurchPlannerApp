@@ -25,6 +25,8 @@ namespace ChurchPlannerApp.Controllers
         }
 
         [HttpGet]
+
+        //Add Code to attatch a MusicUser to a Profile
         public ViewResult AddProfile()
         {
             return View();
