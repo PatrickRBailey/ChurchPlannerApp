@@ -11,7 +11,7 @@ namespace ChurchPlannerApp.Models
         public string FName { get; set; }
         public string LName { get; set; }
         public string UserName { get; set; }
-        public int PhoneNum { get; set; }
+        public string PhoneNum { get; set; }
         public string Email { get; set; }
         public int Type { get; set; }
         public bool IsSelected { get; set; }
