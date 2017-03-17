@@ -2,40 +2,43 @@
 @{
     ViewBag.Title = "Home";
 }
-            @foreach (var s in Model.Services)
+@foreach (var s in Model.Services)
             {
-                <div class="panel-group">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <button type="button" class="btn btn-default btn-sm pull-right"data-toggle="collapse" 
-                                    href="#serviceCollapse_@s.ServiceID" aria-label="Right Align">
-                                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-                            </button>
-                            <h1 class="panel-title lead">@s.Title</h1><br /><br />
-                            <p class="pull-right">
-                                <em>Practice Date: @s.PracticeDate</em><br />
-                                <em>Service Date @s.ServiceDate</em>
-                            </p>
-                        </div>
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <button type="button" class="btn btn-default btn-sm pull-right" data-toggle="collapse"
+                        href="#serviceCollapse_@s.ServiceID" aria-label="Right Align">
+                    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                </button>
+                <h1 class="panel-title lead">@s.Title</h1><br /><br />
+                <p class="pull-right">
+                    <em>Practice Date: @s.PracticeDate</em><br />
+                    <em>Service Date @s.ServiceDate</em>
+                </p>
+            </div>
 
-                        <div id="serviceCollapse_@s.ServiceID" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <h4><b>Team:</b></h4>
-                                <ul style="list-style-type: none;">
-                                    @foreach (var p in s.ServiceRequests)
-                                    {
-                                        @if (p.ServiceID == s.ServiceID && p.Is_Accepted == true)
-                                        {
-                                            <li>@p.ProfileR.FName @p.ProfileR.LName</li>
+            <div id="serviceCollapse_@s.ServiceID" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <h4><b>Team:</b></h4>
+                    <ul style="list-style-type: none;">
+                        @if (s.ServiceRequests.Count > 0)
+                        {
+                            @foreach (var p in s.ServiceRequests)
+                            {
+                                @if (p.ServiceID == s.ServiceID && p.Is_Accepted == true)
+                                {
+                                    <li>@p.ProfileR.FName @p.ProfileR.LName</li>
 
-                                        }
+                                }
 
-                                    }
+                            }
+                        }
 
-                                </ul>
+                    </ul>
 
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            }
+            </div>
+        </div>
+    </div>
+}

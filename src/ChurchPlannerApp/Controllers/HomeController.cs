@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ChurchPlannerApp.Repositories;
 using ChurchPlannerApp.Models;
-
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace ChurchPlannerApp.Controllers
 {
@@ -14,13 +13,14 @@ namespace ChurchPlannerApp.Controllers
     {
         private IProfile Prepository;
         private IService Srepository;
-
+         
+        
         public HomeController(IProfile Prepo, IService Srepo)
         {
             Prepository = Prepo;
             Srepository = Srepo;
         }
-        // GET: /<controller>/
+        [Authorize]
         public ViewResult Index()
         {
             var vm = new ProfileServiceViewModel();

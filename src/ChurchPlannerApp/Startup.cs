@@ -10,6 +10,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using ChurchPlannerApp.Repositories;
 using Microsoft.EntityFrameworkCore;
+using ChurchPlannerApp.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace ChurchPlannerApp
 {
@@ -27,6 +29,17 @@ namespace ChurchPlannerApp
             services.AddDbContext<ApplicationDBContext>(opts =>
                 opts.UseSqlServer(
                     Configuration["Data:ChurchPlanner:ConnectionString"]));
+
+            services.AddDbContext<AppIdentityDBContext>(options => options.UseSqlServer(
+                Configuration["Data:ChurchPlannerIdentity:ConnectionString"]));
+
+            services.AddIdentity<MusicUser, IdentityRole>(options =>
+            { options.Cookies.ApplicationCookie.LoginPath = "/Account/Login"; })
+                .AddEntityFrameworkStores<AppIdentityDBContext>();
+
+
+
+
             //TODO Add Code here to connect to LocalDB
             services.AddMvc();
 
@@ -40,6 +53,7 @@ namespace ChurchPlannerApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.UseIdentity();
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
