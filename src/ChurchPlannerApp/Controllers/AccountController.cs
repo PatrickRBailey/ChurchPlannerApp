@@ -71,6 +71,46 @@ namespace ChurchPlannerApp.Controllers
             return View(vm);
         }
 
+        [AllowAnonymous]
+        public ViewResult Login()
+        {
+            return View(new LoginViewModel());
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                MusicUser user =
+                    await userManager.FindByNameAsync(vm.UserName);
+                if (user != null)
+                {
+                    await signInManager.SignOutAsync();
+
+                    Microsoft.AspNetCore.Identity.SignInResult result =
+                        await signInManager.PasswordSignInAsync(
+                            user, vm.Password, false, false);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+
+                }
+                ModelState.AddModelError("", "Invalid name or password");
+            }
+
+            return View(vm);
+        }
+
+        public async Task<RedirectResult> Logout(string returnUrl = "/")
+        {
+            await signInManager.SignOutAsync();
+            return Redirect(returnUrl);
+        }
+
 
     }
 }
