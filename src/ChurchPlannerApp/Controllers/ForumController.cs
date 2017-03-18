@@ -14,10 +14,12 @@ namespace ChurchPlannerApp.Controllers
     {
         private IMessage repository;
         private UserManager<MusicUser> userManager;
+        private IProfile pRepository;
 
-        public ForumController(IMessage repo, UserManager<MusicUser>userMgr)
+        public ForumController(IMessage repo, IProfile prepo, UserManager<MusicUser>userMgr)
         {
             repository = repo;
+            pRepository = prepo;
             userManager = userMgr;
         }
         // GET: /<controller>/
@@ -34,17 +36,63 @@ namespace ChurchPlannerApp.Controllers
         }
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> NewMessageForm(Message m)
+        public IActionResult NewMessageForm(Message m)
         {
             if (ModelState.IsValid)
             {
+                var user = HttpContext.User.Identity.Name;
+                Profile profile = (from p in pRepository.GetAllProfiles()
+                                   where p.UserName == user
+                                   select p).FirstOrDefault<Profile>();
+
                 var message = new Message();
                 message.MessageID = m.MessageID;
                 message.Body = m.Body;
                 message.Date = DateTime.Now;
+                message.From = profile;
 
-                string name = HttpContext.User.Identity.Name;
-                message.From = await userManager.FindByNameAsync(name);
+
+                repository.Update(message);
+
+                return RedirectToAction("AllMessages", "Forum");
+            }
+            else
+                return View();
+        }
+
+        [HttpGet]
+        public ViewResult CommentForm(int id)
+        {
+            var commentVm = new CommentViewModel();
+            commentVm.MessageID = id;
+            commentVm.Comment = new Models.Comment();
+
+            return View(commentVm);
+        }
+
+        [HttpPost]
+        public IActionResult CommentForm(CommentViewModel commentVm)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var user = HttpContext.User.Identity.Name;
+                Profile profile = (from p in pRepository.GetAllProfiles()
+                                   where p.UserName == user
+                                   select p).FirstOrDefault<Profile>();
+
+                Message message = (from m in repository.GetAllMessages()
+                                   where m.MessageID == commentVm.MessageID
+                                   select m).FirstOrDefault<Message>();
+
+                Comment comment = new Comment();
+                comment.Body = commentVm.Comment.Body;
+                comment.Date = DateTime.Now;
+                comment.From = profile;
+
+                message.Comments.Add(comment);
+
+                
                 repository.Update(message);
 
                 return RedirectToAction("AllMessages", "Forum");

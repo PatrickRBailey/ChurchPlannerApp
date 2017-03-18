@@ -16,7 +16,7 @@ namespace ChurchPlannerApp.Repositories
         }
         public IQueryable<Message> GetAllMessages()
         {
-            return context.Messages.Include(m => m.From);
+            return context.Messages.Include(m => m.From).Include(c => c.Comments);
         }
         public int Update(Message message)
         {
