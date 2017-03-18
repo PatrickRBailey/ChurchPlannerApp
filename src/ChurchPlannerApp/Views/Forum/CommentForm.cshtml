@@ -1,0 +1,18 @@
+﻿﻿@model ChurchPlannerApp.Models.CommentViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewBag.Title = "New Comment";
+}
+
+<h1 class="text-center">Leave a Comment:</h1>
+<form asp-controller="Forum" asp-action="CommentForm" method="post">
+    <div class="form-group center-block" id="comment_form">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <input asp-for="MessageID" type="hidden" />
+        <textarea asp-for="Comment.Body" class="form-control"></textarea><br />
+        <span asp-validation-for="Comment.Body" class="text-danger"></span>
+
+        <button type="submit" class="btn btn-primary pull-right">Post</button>
+    </div>
+</form>

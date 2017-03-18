@@ -26,18 +26,18 @@ namespace ChurchPlannerApp.Repositories
                 };
                 context.Services.Add(service);
 
-                Message message = new Message { Body = "How is everyone doing today?", From = profile };
-                context.Messages.Add(message);
-                message = new Message {Body = "Is there practice this week?", From = profile };
-                context.Messages.Add(message);
+                //Message message = new Message { Body = "How is everyone doing today?", From = profile };
+                //context.Messages.Add(message);
+                //message = new Message {Body = "Is there practice this week?", From = profile };
+                //context.Messages.Add(message);
 
-                profile = new Profile { FName = "Bob", LName = "Loblaw" };
-                context.Profiles.Add(profile);
+                //profile = new Profile { FName = "Bob", LName = "Loblaw" };
+                //context.Profiles.Add(profile);
 
-                message = new Message {Body = "Can anyone play this week?", From = profile };
-                context.Messages.Add(message);
-                message = new Message { Body = "This site is so fun!!", From = profile };
-                context.Messages.Add(message);
+                //message = new Message {Body = "Can anyone play this week?", From = profile };
+                //context.Messages.Add(message);
+                //message = new Message { Body = "This site is so fun!!", From = profile };
+                //context.Messages.Add(message);
 
                 Song song = new Song { Title = "How Great Is Our God", Url = "https://youtu.be/KBD18rsVJHk" };
                 context.Songs.Add(song);

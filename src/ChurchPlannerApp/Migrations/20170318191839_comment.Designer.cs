@@ -8,9 +8,10 @@ using ChurchPlannerApp.Repositories;
 namespace ChurchPlannerApp.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20170318191839_comment")]
+    partial class comment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -26,13 +27,13 @@ namespace ChurchPlannerApp.Migrations
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<int?>("FromProfileID");
+                    b.Property<int?>("FromMusicUserID");
 
                     b.Property<int?>("MessageID");
 
                     b.HasKey("CommentID");
 
-                    b.HasIndex("FromProfileID");
+                    b.HasIndex("FromMusicUserID");
 
                     b.HasIndex("MessageID");
 
@@ -60,11 +61,11 @@ namespace ChurchPlannerApp.Migrations
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<int?>("FromProfileID");
+                    b.Property<int?>("FromMusicUserID");
 
                     b.HasKey("MessageID");
 
-                    b.HasIndex("FromProfileID");
+                    b.HasIndex("FromMusicUserID");
 
                     b.ToTable("Messages");
                 });
@@ -188,9 +189,9 @@ namespace ChurchPlannerApp.Migrations
 
             modelBuilder.Entity("ChurchPlannerApp.Models.Comment", b =>
                 {
-                    b.HasOne("ChurchPlannerApp.Models.Profile", "From")
+                    b.HasOne("ChurchPlannerApp.Models.MusicUser", "From")
                         .WithMany()
-                        .HasForeignKey("FromProfileID");
+                        .HasForeignKey("FromMusicUserID");
 
                     b.HasOne("ChurchPlannerApp.Models.Message")
                         .WithMany("Comments")
@@ -199,9 +200,9 @@ namespace ChurchPlannerApp.Migrations
 
             modelBuilder.Entity("ChurchPlannerApp.Models.Message", b =>
                 {
-                    b.HasOne("ChurchPlannerApp.Models.Profile", "From")
+                    b.HasOne("ChurchPlannerApp.Models.MusicUser", "From")
                         .WithMany()
-                        .HasForeignKey("FromProfileID");
+                        .HasForeignKey("FromMusicUserID");
                 });
 
             modelBuilder.Entity("ChurchPlannerApp.Models.Profile", b =>

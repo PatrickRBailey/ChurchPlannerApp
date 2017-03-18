@@ -11,6 +11,8 @@ namespace ChurchPlannerApp.Models
         public string Body { get; set; }
         public DateTime Date { get; set; }
         public Profile From { get; set; }
+        private List<Comment> comments = new List<Comment>();
+        public List<Comment> Comments { get { return comments; } }
 
     }
 }
