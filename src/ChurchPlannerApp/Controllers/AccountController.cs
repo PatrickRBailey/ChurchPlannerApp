@@ -37,7 +37,8 @@ namespace ChurchPlannerApp.Controllers
                 {
                     UserName = vm.UserName,
                     Email = vm.Email,
-                    PhoneNumber = vm.PhoneNum
+                    PhoneNumber = vm.PhoneNum,
+                    
                     
                 };
                 IdentityResult result = await userManager.CreateAsync(user, vm.Password);
@@ -57,10 +58,10 @@ namespace ChurchPlannerApp.Controllers
                     };
                     context.Profiles.Add(profile);
                     context.SaveChanges();
-                    //await userManager.AddToRoleAsync(user, "Member");
-                    //if (result.Succeeded)
+                    await userManager.AddToRoleAsync(user, "Musician");
+                    if (result.Succeeded)
                     
-                    return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Home");
                 }
                 else
                 {

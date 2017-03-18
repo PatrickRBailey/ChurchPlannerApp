@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ChurchPlannerApp.Repositories;
 using ChurchPlannerApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,12 +23,18 @@ namespace ChurchPlannerApp.Controllers
             pRepository = pRepo;
         }
         // GET: /<controller>/
-        public ViewResult AllServices()
+        [Authorize]
+        public IActionResult AllServices()
         {
+            if (HttpContext.User.IsInRole("Musician"))
+            {
+               return RedirectToAction("Login", "Account");
+            }
             var vm = new AllServicesViewModel();
             vm.Profiles = pRepository.GetAllProfiles().ToList();
             vm.Services = repository.GetAllServices().ToList();
             return View(vm);
+
         }
 
         [HttpGet]
@@ -129,4 +136,7 @@ namespace ChurchPlannerApp.Controllers
             return RedirectToAction("AllServices", "ServicePlan");
         }
     }
+
+
+
 }

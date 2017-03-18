@@ -33,7 +33,8 @@ namespace ChurchPlannerApp
             services.AddDbContext<AppIdentityDBContext>(options => options.UseSqlServer(
                 Configuration["Data:ChurchPlannerIdentity:ConnectionString"]));
 
-            services.AddIdentity<MusicUser, IdentityRole>()
+            services.AddIdentity<MusicUser, IdentityRole>(options =>
+            { options.Cookies.ApplicationCookie.LoginPath = "/Account/Login"; })
                 .AddEntityFrameworkStores<AppIdentityDBContext>();
 
 
