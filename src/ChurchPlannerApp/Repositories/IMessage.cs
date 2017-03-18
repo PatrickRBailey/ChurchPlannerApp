@@ -9,5 +9,6 @@ namespace ChurchPlannerApp.Repositories
     public interface IMessage
     {
         IQueryable<Message> GetAllMessages();
+        int Update(Message message);
     }
 }

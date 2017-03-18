@@ -18,5 +18,15 @@ namespace ChurchPlannerApp.Repositories
         {
             return context.Messages.Include(m => m.From);
         }
+        public int Update(Message message)
+        {
+            if (message.MessageID == 0)
+                context.Messages.Add(message);
+            else
+                context.Messages.Update(message);
+
+            return context.SaveChanges();
+
+        }
     }
 }

@@ -2,13 +2,37 @@
 @{
     ViewBag.Title = "Forum";
 }
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            <a href="@Url.Action("NewMessageForm", "Forum")" class="btn btn-success center-block" style="margin-top:30px;">
+                Add a Message
+            </a>
             @foreach (var m in Model)
             {
                 <div class="messages center-block">
+                    <hr class="noMargin">
                     <p class="created_post">@m.Body </p>
 
                     <p class="postInfo pull-right">
-                        @m.From.FName @m.From.LName <i>@m.Date.ToString("d")</i>
+                        @m.From.UserName<br /><i>@m.Date.ToString("d")</i>
                     </p>
+                    <a href="@Url.Action("CommentForm", "Forum",new {id=m.MessageID})" class="btn btn-primary pull-left" style="margin-top:30px;">
+                        Comment
+                    </a>
                 </div>
+                @foreach (var c in m.Comments)
+                {
+                    <div class="comments center-block">
+                        <p class="comment_text">@c.Body</p>
+                    </div>
+                }
+
+
+
+
             }
+        </div>
+    </div>
+</div>

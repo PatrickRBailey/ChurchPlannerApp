@@ -1,0 +1,26 @@
+﻿﻿@model ChurchPlannerApp.Models.Message
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewBag.Title = "New Message";
+}
+
+<h1 class="text-center">Create a New Message</h1>
+<form asp-controller="Forum" asp-action="NewMessageForm" method="post">
+
+    <div class="form-group center-block" id="new_message_form">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <input asp-for="MessageID" type="hidden" />
+
+
+        <label asp-for="Body">Body:</label>
+        <textarea asp-for="Body" class="form-control"></textarea>
+        <span asp-validation-for="Body" class="text-danger"></span>
+        <br />
+
+
+
+
+        <button type="submit" class="btn btn-primary pull-right">Post</button>
+    </div>
+</form>
