@@ -8,6 +8,7 @@ using ChurchPlannerApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
+
 namespace ChurchPlannerApp.Controllers
 {
     public class HomeController : Controller
@@ -18,7 +19,9 @@ namespace ChurchPlannerApp.Controllers
         private IService Srepository;
          
         
+
         public HomeController(IProfile Prepo, IService Srepo, UserManager<MusicUser>usrMgr, SignInManager<MusicUser>signInMgr)
+
         {
             Prepository = Prepo;
             Srepository = Srepo;

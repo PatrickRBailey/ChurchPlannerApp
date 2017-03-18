@@ -15,16 +15,12 @@ namespace ChurchPlannerApp.Controllers
         private SignInManager<MusicUser> signInManager;
         private ApplicationDBContext context;
 
-
-
         public AccountController(UserManager<MusicUser> userMgr,
             SignInManager<MusicUser> signInMgr, ApplicationDBContext ctx)
         {
             userManager = userMgr;
             signInManager = signInMgr;
             context = ctx;
-
-         
         }
 
         public IActionResult Register()
@@ -48,7 +44,9 @@ namespace ChurchPlannerApp.Controllers
 
                 if (result.Succeeded)
                 {
-                   var profile = new Profile
+
+                    var profile = new Profile
+
                     {
                         FName = vm.FirstName,
                         LName = vm.LastName,
