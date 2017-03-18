@@ -25,6 +25,8 @@ namespace ChurchPlannerApp.Repositories
         {
             return context.Profiles.Include(p => p.ServiceRequests).ToList();
         }
+
+        
         public int Update(Profile profile)
         {
             if (profile.ProfileID == 0)
