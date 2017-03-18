@@ -8,7 +8,7 @@
     {
         @foreach (var pro in s.ServiceRequests)
         {
-            @if (pro.ProfileR.ProfileID == Model.Profile.ProfileID)
+            @if (pro.ProfileR.ProfileID == Model.Profile.ProfileID && pro.Is_Accepted == true)
             {
                 <div class="panel-group">
                     <div class="panel panel-primary">
@@ -41,11 +41,12 @@
                                         }
                                     }
 
+                                </ul>
 
-                    </ul>
-
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             }
 
         }

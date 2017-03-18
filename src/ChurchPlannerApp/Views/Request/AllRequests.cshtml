@@ -2,37 +2,48 @@
 @{
     ViewBag.Title = "Requests";
 }
-            @foreach (var p in Model.Profiles)
+@foreach (var s in Model.Services)
             {
-                <div class="center-block">
-                    @foreach (var sr in p.ServiceRequests)
+    <div class="center-block">
+        @if (s.ServiceRequests.Count > 0)
+                {
+            @foreach (var sr in s.ServiceRequests)
                     {
-                        @if (sr.Is_Accepted == false)
+                @if (sr.ProfileR.ProfileID == Model.Profile.ProfileID && sr.Is_Accepted == false)
                         {
-                            <div class="panel-group">
-                                <div class="panel panel-info">
-                                    <div class="panel-heading requestPanel">
-                                        <h3>@sr.ProfileR.FName @sr.ProfileR.LName</h3>
-                                        <h4>@sr.ServiceR.Title</h4>
-                                        <p>
-                                            Rehersal: @sr.ServiceR.PracticeDate<br />
-                                            Service: @sr.ServiceR.ServiceDate
-                                        </p>
-                                        <a href="@Url.Action("AcceptRequest", "Request", new { PID = sr.ProfileID, SID = sr.ServiceID })" class="btn btn-success">
-                                            Accept
-                                        </a>
-                                        <a href="@Url.Action("DeclineRequest", "Request", new { PID = sr.ProfileID, SID = sr.ServiceID })" class="btn btn-danger">
-                                            Decline
-                                        </a>
-                                    </div>
-                                </div>
+                    <div class="panel-group">
+                        <div class="panel panel-info">
+                            <div class="panel-heading requestPanel">
+                                <h3>@sr.ProfileR.FName @sr.ProfileR.LName</h3>
+                                <h4>@sr.ServiceR.Title</h4>
+                                <p>
+                                    Rehersal: @sr.ServiceR.PracticeDate<br />
+                                    Service: @sr.ServiceR.ServiceDate
+                                </p>
+                                <a href="@Url.Action("AcceptRequest", "Request", new { PID = sr.ProfileID, SID = sr.ServiceID })" class="btn btn-success">
+                                    Accept
+                                </a>
+                                <a href="@Url.Action("DeclineRequest", "Request", new { PID = sr.ProfileID, SID = sr.ServiceID })" class="btn btn-danger">
+                                    Decline
+                                </a>
                             </div>
+                        </div>
+                    </div>
 
+                }
 
-                        }
-                    }
-                </div>
 
             }
+
+        }
+    </div>
+
+
+
+
+
+}
+
+
 
 
