@@ -44,7 +44,9 @@ namespace ChurchPlannerApp.Controllers
 
                 if (result.Succeeded)
                 {
+
                     var profile = new Profile
+
                     {
                         FName = vm.FirstName,
                         LName = vm.LastName,
@@ -94,8 +96,11 @@ namespace ChurchPlannerApp.Controllers
                         await signInManager.PasswordSignInAsync(
                             user, vm.Password, false, false);
                     if (result.Succeeded)
+
                     {
+                        
                         return RedirectToAction("Index", "Home");
+  
                     }
 
                 }

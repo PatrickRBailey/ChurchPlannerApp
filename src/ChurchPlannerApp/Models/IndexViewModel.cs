@@ -5,9 +5,7 @@ using System.Threading.Tasks;
 
 namespace ChurchPlannerApp.Models
 {
-    public class ProfileServiceViewModel
+    public class IndexViewModel
     {
-        public Profile Profile { get; set; }
-        public List<Service> Services { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace ChurchPlannerApp.Repositories
 
         public IQueryable<Service> GetAllServices()
         {
-            return context.Services;
+            return context.Services.Include(p => p.ServiceRequests);
         }
 
         public int Update(Service service)

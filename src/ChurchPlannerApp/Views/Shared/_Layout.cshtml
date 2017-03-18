@@ -64,7 +64,7 @@
         <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllMembers" ? "active" : "")">@Html.ActionLink("Players", "AllMembers", "Profile")</li>
         <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllRequests" ? "active" : "")">@Html.ActionLink("Service Requests", "AllRequests", "Request")</li>
         <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllServices" ? "active" : "")">@Html.ActionLink("Service Plans", "AllServices", "ServicePlan")</li>
-
+        <li role="presentation">@Html.ActionLink("Logout", "Logout", "Account")</li>
 
     </ul>
     <div>
