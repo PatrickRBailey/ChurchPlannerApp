@@ -6,27 +6,27 @@
 }
 
 <h1 class="text-center">Add Members to the Service</h1><br />
-<form asp-controller="ServicePlan" asp-action="AddMembers" method="post">
-    <input type="hidden" asp-for="Service.ServiceID" />
-    <div class="form-group center-block">
-        @for (var p = 0; p < Model.Profiles.Count; p++)
-        {
-            <div class="form-check text-center">
-                <label asp-for="@Model.Profiles[p].IsSelected" class="form-check-label">
-                    @Model.Profiles[p].FName @Model.Profiles[p].LName
-                    <input type="checkbox" asp-for="@Model.Profiles[p].IsSelected" class="form-check-input" />
-                    <input type="hidden" asp-for="@Model.Profiles[p].ProfileID" />
-                </label>
-            </div>
+@if (Model.Profiles.Count > 0)
+{
+    <form asp-controller="ServicePlan" asp-action="AddMembers" method="post">
+        <input type="hidden" asp-for="Service.ServiceID" />
+        <div class="form-group center-block">
+            @for (var p = 0; p < Model.Profiles.Count; p++)
+            {
+                            <div class="form-check text-center">
+                                <label asp-for="@Model.Profiles[p].IsSelected" class="form-check-label">
+                                    @Model.Profiles[p].FName @Model.Profiles[p].LName
+                                    <input type="checkbox" asp-for="@Model.Profiles[p].IsSelected" class="form-check-input" />
+                                    <input type="hidden" asp-for="@Model.Profiles[p].ProfileID" />
+                                </label>
+                            </div>
+
+                
 
 
+            }
 
-        }
-
-
-
-
-
-        <button type="submit" class="btn btn-success pull-right addMemberBtn">Add</button>
-    </div>
-</form>
+            <button type="submit" class="btn btn-success pull-right addMemberBtn">Add</button>
+        </div>
+    </form>
+}

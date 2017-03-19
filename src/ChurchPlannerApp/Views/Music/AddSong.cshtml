@@ -8,13 +8,19 @@
     <h1 class="center-block text-center">Add a Song</h1><br />
     <form asp-controller="Music" asp-action="AddSong" method="post" class="addSong">
         <div class="form-group center-block">
+            <div asp-validation-summary="All" class="text-danger"></div>
             <input asp-for="SongID" type="hidden" />
 
             <label asp-for="Title">Song Title:</label>
-            <input asp-for="Title" class="form-control" /><br />
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+            <br />
+            
 
             <label asp-for="Url">Song Url:</label>
-            <input asp-for="Url" class="form-control" /><br />
+            <input asp-for="Url" class="form-control" />
+            <span asp-validation-for="Url" class="text-danger"></span>
+            <br />
 
 
             <button type="submit" class="btn btn-primary pull-right">Add Song</button>

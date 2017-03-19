@@ -6,35 +6,42 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-8">
-           <a href="@Url.Action("NewMessageForm", "Forum")" class="btn btn-success pull-right" style="margin-top:30px;">
+            <a href="@Url.Action("NewMessageForm", "Forum")" class="btn btn-success pull-right" style="margin-top:30px;">
                 Add a Message <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </a>
-            @foreach (var m in Model)
+            @if (Model.Count > 0)
             {
-                <div class="messages center-block">
-                    <hr class="noMargin">
-                    <p class="created_post">@m.Body </p>
-
-                    <p class="postInfo pull-right">
-                        @m.From.UserName<br /><i>@m.Date.ToString("d")</i>
-                    </p>
-                    <a href="@Url.Action("CommentForm", "Forum",new {id=m.MessageID})" class="btn btn-primary pull-left" style="margin-top:30px;">
-                        Comment
-                    </a>
-                </div>
-                @foreach (var c in m.Comments)
+                @foreach (var m in Model)
                 {
-                    <div class="comments center-block">
-                        <p class="comment_text">@c.Body</p>
+
+                    <div class="messages center-block">
+                        <hr class="noMargin">
+                        <p class="created_post">@m.Body </p>
+
                         <p class="postInfo pull-right">
-                            @c.From.UserName<br /><i>@c.Date.ToString("d")</i>
+                            @m.From.UserName<br /><i>@m.Date.ToString("d")</i>
                         </p>
+                        <a href="@Url.Action("CommentForm", "Forum", new { id = m.MessageID })" class="btn btn-primary pull-left" style="margin-top:30px;">
+                            Comment
+                        </a>
                     </div>
+                    @if (m.Comments.Count > 0)
+                    {
+                        @foreach (var c in m.Comments)
+                        {
+                            <div class="comments center-block">
+                                <p class="comment_text">@c.Body</p>
+                                <p class="postInfo pull-right">
+                                    @c.From.UserName<br /><i>@c.Date.ToString("d")</i>
+                                </p>
+                            </div>
+                        }
+                    }
+
+
+
+
                 }
-
-
-
-
             }
         </div>
     </div>
