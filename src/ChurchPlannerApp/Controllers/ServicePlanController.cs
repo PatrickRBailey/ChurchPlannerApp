@@ -10,12 +10,14 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ChurchPlannerApp.Controllers
 {
+    [Authorize]
+    
     public class ServicePlanController : Controller
     {
         private IService repository;
         private IProfile pRepository;
 
-
+        
         public ServicePlanController(IService repo, IProfile pRepo)
         {
             repository = repo;
