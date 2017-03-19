@@ -1,0 +1,54 @@
+﻿@model ChurchPlannerApp.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="text-danger" asp-validation-summary="All"></div>
+<form asp-action="AdminRegister" asp-controller="Account" method="post">
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <div><span asp-validation-for="FirstName" class="text-danger"></span></div>
+        <input asp-for="FirstName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <div><span asp-validation-for="LastName" class="text-danger"></span></div>
+        <input asp-for="LastName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <div><span asp-validation-for="Email" class="text-danger"></span></div>
+        <input asp-for="Email" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="UserName"></label>
+        <div><span asp-validation-for="UserName" class="text-danger"></span></div>
+        <input asp-for="UserName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PhoneNum"></label>
+        <div><span asp-validation-for="PhoneNum" class="text-danger"></span></div>
+        <input asp-for="PhoneNum" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="UserRole">Role:</label>
+        <select class="form-control" asp-for="UserRole">
+            @foreach (var r in ViewBag.roles)
+            {
+                <option>@r</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <div><span asp-validation-for="Password" class="text-danger"></span></div>
+        <input type="password" asp-for="Password" class="form-control" />
+    </div>
+    <button class="btn btn-primary" type="submit">Register</button>
+</form>

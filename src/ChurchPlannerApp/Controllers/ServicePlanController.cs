@@ -7,7 +7,6 @@ using ChurchPlannerApp.Repositories;
 using ChurchPlannerApp.Models;
 using Microsoft.AspNetCore.Authorization;
 
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ChurchPlannerApp.Controllers
 {

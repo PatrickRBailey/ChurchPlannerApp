@@ -19,9 +19,21 @@ namespace ChurchPlannerApp.Controllers
             repository = repo;
         }
         // GET: /<controller>/
-        
-        public ViewResult AllMembers()
+        [Authorize]
+        public IActionResult AllMembers()
         {
+            if (HttpContext.User.IsInRole("Leader"))
+            {
+                ViewBag.role = "Leader";
+            }
+            else if (HttpContext.User.IsInRole("Admin"))
+                ViewBag.role = "Admin";
+
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             return View(repository.GetAllProfiles().ToList());
 
         }
@@ -40,7 +52,7 @@ namespace ChurchPlannerApp.Controllers
             var profile = new Profile {
                 FName = p.FName,
                 LName = p.LName,
-                Type = 0,
+                Type = p.Type,
                 Email = p.Email,
                 PhoneNum = p.PhoneNum,
                 UserName = p.UserName,
