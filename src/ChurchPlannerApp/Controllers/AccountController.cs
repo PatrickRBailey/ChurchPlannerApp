@@ -14,13 +14,15 @@ namespace ChurchPlannerApp.Controllers
         private UserManager<MusicUser> userManager;
         private SignInManager<MusicUser> signInManager;
         private ApplicationDBContext context;
+        private AppIdentityDBContext IDContext;
 
         public AccountController(UserManager<MusicUser> userMgr,
-            SignInManager<MusicUser> signInMgr, ApplicationDBContext ctx)
+            SignInManager<MusicUser> signInMgr, ApplicationDBContext ctx, AppIdentityDBContext Ictx)
         {
             userManager = userMgr;
             signInManager = signInMgr;
             context = ctx;
+            IDContext = Ictx;
         }
 
         public IActionResult Register()
@@ -54,6 +56,7 @@ namespace ChurchPlannerApp.Controllers
                         Email = user.Email,
                         PhoneNum = user.PhoneNumber,
                         UserName = user.UserName,
+                        Type = "Musician",
                         User = user
                     };
                     context.Profiles.Add(profile);
@@ -73,6 +76,64 @@ namespace ChurchPlannerApp.Controllers
             }
             return View(vm);
         }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult AdminRegister()
+        {
+            var vm = new RegisterViewModel();
+            ViewBag.roles = IDContext.Roles.ToList();
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> AdminRegister(RegisterViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                MusicUser user = new MusicUser
+                {
+                    UserName = vm.UserName,
+                    Email = vm.Email,
+                    PhoneNumber = vm.PhoneNum,
+
+
+                };
+                IdentityResult result = await userManager.CreateAsync(user, vm.Password);
+
+                if (result.Succeeded)
+                {
+
+                    var profile = new Profile
+
+                    {
+                        FName = vm.FirstName,
+                        LName = vm.LastName,
+                        Email = user.Email,
+                        PhoneNum = user.PhoneNumber,
+                        UserName = user.UserName,
+                        Type = vm.UserRole,
+                        User = user
+                    };
+                    context.Profiles.Add(profile);
+                    context.SaveChanges();
+                    await userManager.AddToRoleAsync(user, vm.UserRole);
+                    if (result.Succeeded)
+
+                        return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    foreach (IdentityError error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+            return View(vm);
+        }
+
 
         [AllowAnonymous]
         public ViewResult Login()

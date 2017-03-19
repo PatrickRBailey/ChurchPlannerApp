@@ -2,10 +2,13 @@
 @{
     ViewBag.Title = "Members";
 }
+            @if (ViewBag.role == "Admin")
+            {
             <a type="button" class="btn btn-default btn-success pull-right"
-                    href="@Url.Action("AddProfile", "Profile")" aria-label="Right Align">
+                    href="@Url.Action("AdminRegister", "Account")" aria-label="Right Align">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"> Add</span>
             </a><br /><br /><br />
+            }
             @foreach (var p in Model)
             {
                 <div class="panel-group">
@@ -30,8 +33,10 @@
                         <div id="profileCollapse_@p.ProfileID" class="panel-collapse collapse">
                             <div class="panel-body">
                                 <ul style="list-style-type:none;">
-                                    <li>@p.Email</li>
-                                    <li>@p.PhoneNum</li>
+                                    <li>UserName: @p.UserName</li>
+                                    <li>Email: @p.Email</li>
+                                    <li>Phone: @p.PhoneNum</li>
+                                    <li>Profile Type: @p.Type</li>
                                 </ul>
                             </div>
                         </div>
