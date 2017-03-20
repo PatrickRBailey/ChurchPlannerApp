@@ -131,7 +131,9 @@ namespace ChurchPlannerApp.Controllers
                     }
                 }
             }
+
             ViewBag.roles = IDContext.Roles.ToList();
+
             return View(vm);
         }
 

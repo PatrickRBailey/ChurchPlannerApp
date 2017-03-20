@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Members";
 }
+
 @if (ViewBag.role == "Admin")
             {
     <a type="button" class="btn btn-default btn-success pull-right"
@@ -30,6 +31,7 @@
                            href="@Url.Action("RemoveProfile", "Profile", new { id = p.ProfileID })">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </a>
+
                     </div>
                 </div>
                 <div id="profileCollapse_@p.ProfileID" class="panel-collapse collapse">
