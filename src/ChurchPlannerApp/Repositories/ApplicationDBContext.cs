@@ -17,7 +17,6 @@ namespace ChurchPlannerApp.Repositories
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Song> Songs { get; set; }
         public DbSet<Service> Services { get; set; }
-        public DbSet<Instrument> Instruments { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ServiceRequest>()
