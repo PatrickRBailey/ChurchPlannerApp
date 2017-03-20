@@ -21,6 +21,17 @@ namespace ChurchPlannerApp.Controllers
         // GET: /<controller>/
         public ViewResult AllSongs()
         {
+            if (HttpContext.User.IsInRole("Leader"))
+            {
+                ViewBag.role = "Leader";
+            }
+            else if (HttpContext.User.IsInRole("Admin"))
+                ViewBag.role = "Admin";
+
+            else
+            {
+                ViewBag.role = "Musician";
+            }
             return View(repository.GetAllSongs().ToList());
         }
 
