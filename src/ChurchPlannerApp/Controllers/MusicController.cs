@@ -33,16 +33,19 @@ namespace ChurchPlannerApp.Controllers
         [HttpPost]
         public IActionResult AddSong(Song s)
         {
-            var song = new Song
+            if (ModelState.IsValid)
             {
-                Title = s.Title,
-                Url = s.Url
-            };
+                var song = new Song
+                {
+                    Title = s.Title,
+                    Url = s.Url
+                };
+                repository.Update(song);
 
-
-            repository.Update(song);
-
-            return RedirectToAction("AllSongs", "Music");
+                return RedirectToAction("AllSongs", "Music");
+            }
+            else
+                return View();
         }
 
 

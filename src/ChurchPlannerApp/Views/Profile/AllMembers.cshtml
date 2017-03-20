@@ -2,45 +2,50 @@
 @{
     ViewBag.Title = "Members";
 }
-            @if (ViewBag.role == "Admin")
+
+@if (ViewBag.role == "Admin")
             {
-            <a type="button" class="btn btn-default btn-success pull-right"
-                    href="@Url.Action("AdminRegister", "Account")" aria-label="Right Align">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"> Add</span>
-            </a><br /><br /><br />
-            }
-            @foreach (var p in Model)
+    <a type="button" class="btn btn-default btn-success pull-right"
+       href="@Url.Action("AdminRegister", "Account")" aria-label="Right Align">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"> Add</span>
+    </a><br /><br /><br />
+}
+@if (Model.Count > 0)
             {
-                <div class="panel-group">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <button type="button" class="btn btn-default btn-sm pull-right" data-toggle="collapse"
-                                    href="#profileCollapse_@p.ProfileID" aria-label="Right Align">
-                                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-                            </button>
-                            <h1 class="panel-title lead">@p.FName @p.LName</h1><br /><br />
-                            <div class="btn-group" role="group">
-                                <a type="button" class="btn btn-primary btn-xs"
-                                        href="@Url.Action("EditProfile", "Profile",new {id=p.ProfileID})">
-                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                </a>
-                                <a type="button" class="btn btn-danger btn-xs"
-                                        href="@Url.Action("RemoveProfile", "Profile",new {id=p.ProfileID})">
-                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                </a>
-                            </div>
-                        </div>
-                        <div id="profileCollapse_@p.ProfileID" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <ul style="list-style-type:none;">
-                                    <li>UserName: @p.UserName</li>
-                                    <li>Email: @p.Email</li>
-                                    <li>Phone: @p.PhoneNum</li>
-                                    <li>Profile Type: @p.Type</li>
-                                </ul>
-                            </div>
-                        </div>
+    @foreach (var p in Model)
+    {
+        <div class="panel-group">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <button type="button" class="btn btn-default btn-sm pull-right" data-toggle="collapse"
+                            href="#profileCollapse_@p.ProfileID" aria-label="Right Align">
+                        <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                    </button>
+                    <h1 class="panel-title lead">@p.FName @p.LName</h1><br /><br />
+                    <div class="btn-group" role="group">
+                        <a type="button" class="btn btn-primary btn-xs"
+                           href="@Url.Action("EditProfile", "Profile", new { id = p.ProfileID })">
+                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                        </a>
+                        <a type="button" class="btn btn-danger btn-xs"
+                           href="@Url.Action("RemoveProfile", "Profile", new { id = p.ProfileID })">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </a>
+
                     </div>
                 </div>
+                <div id="profileCollapse_@p.ProfileID" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ul style="list-style-type:none;">
+                            <li>UserName: @p.UserName</li>
+                            <li>Email: @p.Email</li>
+                            <li>Phone: @p.PhoneNum</li>
+                            <li>Profile Type: @p.Type</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            }
+    }
+}

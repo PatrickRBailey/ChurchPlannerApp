@@ -47,15 +47,20 @@ namespace ChurchPlannerApp.Controllers
         [HttpPost]
         public IActionResult AddService(Service s)
         {
-            var service = new Service
+            if (ModelState.IsValid)
             {
-                Title = s.Title,
-                PracticeDate = s.PracticeDate,
-                ServiceDate = s.ServiceDate
-            };
-            repository.Update(service);
+                var service = new Service
+                {
+                    Title = s.Title,
+                    PracticeDate = s.PracticeDate,
+                    ServiceDate = s.ServiceDate
+                };
+                repository.Update(service);
 
-            return RedirectToAction("AllServices", "ServicePlan");
+                return RedirectToAction("AllServices", "ServicePlan");
+            }
+            else
+                return View();
         }
 
         public IActionResult RemoveService(int id)
@@ -93,7 +98,12 @@ namespace ChurchPlannerApp.Controllers
             var service = (from s in repository.GetAllServices()
                            where s.ServiceID == serviceID
                            select s).FirstOrDefault<Service>();
+            var profiles = pRepository.GetAllProfiles().ToList();
 
+            foreach (var p in profiles)
+            {
+                
+            }
             var vm = new AddMembersVM();
             vm.Service = (service);
             vm.Profiles = pRepository.GetAllProfiles().ToList();
@@ -121,13 +131,14 @@ namespace ChurchPlannerApp.Controllers
                 var GetProfile = (from p in pRepository.GetAllProfiles()
                                   where p.ProfileID == request.ProfileID
                                   select p).FirstOrDefault<Profile>();
+                
 
                 request.ProfileR = GetProfile;
                 
                 request.ServiceR = Getservice;
-                
 
-                
+
+                GetProfile.IsSelected = true;
                 GetProfile.ServiceRequests.Add(request);
                 pRepository.Update(GetProfile);
             }

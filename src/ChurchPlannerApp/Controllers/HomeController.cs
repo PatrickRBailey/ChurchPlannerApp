@@ -43,14 +43,6 @@ namespace ChurchPlannerApp.Controllers
             return View(vm);
         }
         
-        public IActionResult Admin()
-        {
-            return View();
-        }
 
-        public IActionResult Dashboard()
-        {
-            return View();
-        }
     }
 }
