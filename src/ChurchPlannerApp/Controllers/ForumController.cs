@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace ChurchPlannerApp.Controllers
 {
+    [Authorize]
     public class ForumController : Controller
     {
         private IMessage repository;

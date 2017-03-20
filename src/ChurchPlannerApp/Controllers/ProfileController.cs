@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ChurchPlannerApp.Controllers
 {
+    [Authorize]
     public class ProfileController : Controller
     {
         private IProfile repository;
