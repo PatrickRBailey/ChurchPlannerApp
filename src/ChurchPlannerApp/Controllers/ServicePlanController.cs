@@ -99,20 +99,41 @@ namespace ChurchPlannerApp.Controllers
                            where s.ServiceID == serviceID
                            select s).FirstOrDefault<Service>();
             var profiles = pRepository.GetAllProfiles().ToList();
-
+            var filteredProfiles = new List<Profile>();
+            bool test = false;
             foreach (var p in profiles)
             {
+                if (p.ServiceRequests.Count == 0)
+                {
+                    filteredProfiles.Add(p);
+                    continue;
+                }
                 
+                
+
+                foreach (var sr in p.ServiceRequests)
+                {
+                    if (sr.ServiceID != serviceID)
+                        test = true;
+                    else if (sr.ServiceID == serviceID && sr.ProfileID == p.ProfileID)
+                    {
+                        test = false;
+                        break;
+                    }   
+                }
+                if (test == true)
+                    filteredProfiles.Add(p);
             }
             var vm = new AddMembersVM();
             vm.Service = (service);
-            vm.Profiles = pRepository.GetAllProfiles().ToList();
+            vm.Profiles = filteredProfiles;
             return View(vm);
         }
 
         [HttpPost]
         public IActionResult AddMembers(AddMembersVM vm)
         {
+
             //vm.Profiles = pRepository.GetAllProfiles().ToList();
             var service = vm.Service;
 
@@ -137,8 +158,6 @@ namespace ChurchPlannerApp.Controllers
                 
                 request.ServiceR = Getservice;
 
-
-                GetProfile.IsSelected = true;
                 GetProfile.ServiceRequests.Add(request);
                 pRepository.Update(GetProfile);
             }
