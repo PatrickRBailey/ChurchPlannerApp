@@ -22,7 +22,8 @@ namespace ChurchPlannerApp
         {
             Configuration = new ConfigurationBuilder()
             .SetBasePath(env.ContentRootPath)
-            .AddJsonFile("appsettings.json").Build();
+            .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
+            .Build();
         }
         public void ConfigureServices(IServiceCollection services)
         {
