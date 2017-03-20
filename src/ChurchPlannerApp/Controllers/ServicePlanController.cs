@@ -52,8 +52,8 @@ namespace ChurchPlannerApp.Controllers
                 var service = new Service
                 {
                     Title = s.Title,
-                    PracticeDate = s.PracticeDate,
-                    ServiceDate = s.ServiceDate
+                    PracticeDate = DateTime.Parse(s.PracticeDate.ToString()),
+                    ServiceDate = DateTime.Parse(s.ServiceDate.ToString())
                 };
                 repository.Update(service);
 
