@@ -12,12 +12,13 @@
         body {
             background-color: #f5f5f5;
         }
-        .addSong{
+
+        .addSong {
             width: 80%;
         }
 
-        .addMemberBtn{
-            margin-right:170px;
+        .addMemberBtn {
+            margin-right: 170px;
         }
 
         .form-control {
@@ -61,24 +62,99 @@
             float: left;
             border: solid #d7ccc8 .5px;
             padding: 10px;
-            
         }
+
         .container {
             margin-top: 50px;
         }
     </style>
 </head>
 <body>
-    <ul class="nav nav-tabs">
-        <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Home", "Index", "Home")</li>
-        <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllMessages" ? "active" : "")">@Html.ActionLink("Forum", "AllMessages", "Forum")</li>
-        <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllSongs" ? "active" : "")">@Html.ActionLink("Music", "AllSongs", "Music")</li>
-        <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllMembers" ? "active" : "")">@Html.ActionLink("Players", "AllMembers", "Profile")</li>
-        <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllRequests" ? "active" : "")">@Html.ActionLink("Service Requests", "AllRequests", "Request")</li>
-        <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllServices" ? "active" : "")">@Html.ActionLink("Service Plans", "AllServices", "ServicePlan")</li>
-        <li role="presentation">@Html.ActionLink("Logout", "Logout", "Account")</li>
+      <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="#">ChurchPlannerApp</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+            <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Home", "Index", "Home")</li>
+            <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllMessages" ? "active" : "")">@Html.ActionLink("Forum", "AllMessages", "Forum")</li>
+            <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllSongs" ? "active" : "")">@Html.ActionLink("Music", "AllSongs", "Music")</li>
+            <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllMembers" ? "active" : "")">@Html.ActionLink("Players", "AllMembers", "Profile")</li>
+            <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllRequests" ? "active" : "")">@Html.ActionLink("Service Requests", "AllRequests", "Request")</li>
+            <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllServices" ? "active" : "")">@Html.ActionLink("Service Plans", "AllServices", "ServicePlan")</li>
+            
 
-    </ul>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li role="presentation">@Html.ActionLink("Logout", "Logout", "Account")</li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @*<nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#MyNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="MyNavbar">
+                <ul class="nav nav-tabs dropdown-menu">
+                    <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllMessages" ? "active" : "")">@Html.ActionLink("Forum", "AllMessages", "Forum")</li>
+                    <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllSongs" ? "active" : "")">@Html.ActionLink("Music", "AllSongs", "Music")</li>
+                    <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllMembers" ? "active" : "")">@Html.ActionLink("Players", "AllMembers", "Profile")</li>
+                    <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllRequests" ? "active" : "")">@Html.ActionLink("Service Requests", "AllRequests", "Request")</li>
+                    <li role="presentation" class="@(ViewContext.RouteData.Values["Action"].ToString() == "AllServices" ? "active" : "")">@Html.ActionLink("Service Plans", "AllServices", "ServicePlan")</li>
+                    <li role="presentation">@Html.ActionLink("Logout", "Logout", "Account")</li>
+                 </ul>
+            </div>
+        </div>
+    </nav>*@
     <div>
         <div class="container">
             <div class="row">
