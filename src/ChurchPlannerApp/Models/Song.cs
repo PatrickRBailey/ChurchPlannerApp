@@ -11,7 +11,6 @@ namespace ChurchPlannerApp.Models
         public int SongID { get; set; }
         [Required (ErrorMessage ="You must enter the name of a song")]
         public string Title { get; set; }
-        [Required (ErrorMessage ="You must enter a youtube link")]
         public string Url { get; set; }
     }
 }
