@@ -10,5 +10,6 @@ namespace ChurchPlannerApp.Repositories
     {
         IQueryable<Message> GetAllMessages();
         int Update(Message message);
+        int Delete(Message message);
     }
 }

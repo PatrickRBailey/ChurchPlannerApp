@@ -103,5 +103,14 @@ namespace ChurchPlannerApp.Controllers
             else
                 return View();
         }
+        public IActionResult RemoveMessage(int id)
+        {
+            Message message = (from m in repository.GetAllMessages()
+                               where m.MessageID == id
+                               select m).FirstOrDefault<Message>(); 
+
+            repository.Delete(message);
+            return RedirectToAction("AllMessages", "Forum");
+        }
     }
 }

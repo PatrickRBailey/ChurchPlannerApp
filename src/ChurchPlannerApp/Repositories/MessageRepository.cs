@@ -28,5 +28,10 @@ namespace ChurchPlannerApp.Repositories
             return context.SaveChanges();
 
         }
+        public int Delete(Message m)
+        {
+            context.Messages.Remove(m);
+            return context.SaveChanges();
+        }
     }
 }

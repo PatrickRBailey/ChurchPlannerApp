@@ -15,10 +15,15 @@
                 {
 
                     <div class="messages center-block">
+                        <a type="button" class="btn btn-danger btn-xs pull-right"
+                           href="@Url.Action("RemoveMessage", "Forum", new { id = m.MessageID })" aria-label="Right Align">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </a><br />
                         <hr class="noMargin">
                         <p class="created_post">@m.Body </p>
 
                         <p class="postInfo pull-right">
+                            
                             @m.From.UserName<br /><i>@m.Date.ToString("d")</i>
                         </p>
                         <a href="@Url.Action("CommentForm", "Forum", new { id = m.MessageID })" class="btn btn-primary pull-left" style="margin-top:30px;">
