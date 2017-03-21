@@ -39,6 +39,7 @@ namespace ChurchPlannerApp.Controllers
         [Authorize]
         public IActionResult NewMessageForm(Message m)
         {
+            //TODO: Test this
             if (ModelState.IsValid)
             {
                 var user = HttpContext.User.Identity.Name;
@@ -74,6 +75,7 @@ namespace ChurchPlannerApp.Controllers
         [HttpPost]
         public IActionResult CommentForm(CommentViewModel commentVm)
         {
+            //TODO: Test this
 
             if (ModelState.IsValid)
             {

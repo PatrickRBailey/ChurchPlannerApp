@@ -95,6 +95,7 @@ namespace ChurchPlannerApp.Controllers
         [HttpGet]
         public ViewResult AddMembers(int serviceID)
         {
+            //TODO: Test this
             var service = (from s in repository.GetAllServices()
                            where s.ServiceID == serviceID
                            select s).FirstOrDefault<Service>();
@@ -133,8 +134,7 @@ namespace ChurchPlannerApp.Controllers
         [HttpPost]
         public IActionResult AddMembers(AddMembersVM vm)
         {
-
-            //vm.Profiles = pRepository.GetAllProfiles().ToList();
+            //TODO: Test this
             var service = vm.Service;
 
             

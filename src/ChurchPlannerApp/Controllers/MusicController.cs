@@ -44,6 +44,7 @@ namespace ChurchPlannerApp.Controllers
         [HttpPost]
         public IActionResult AddSong(Song s)
         {
+            //TODO: Test this
             if (ModelState.IsValid)
             {
                 var song = new Song
